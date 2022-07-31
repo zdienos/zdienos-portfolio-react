@@ -2,100 +2,88 @@ import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Particle from "../Particle";
-import Resumecontent from "./ResumeContent";
-import axios from "axios";
-import pdf from "../../Assets/Soumyajit-Behera.pdf";
-import { AiOutlineDownload } from "react-icons/ai";
+import pdf from "../../Assets/cv-en.pdf";
+import { AiOutlineDownload,  AiFillCaretLeft, AiFillCaretRight } from "react-icons/ai";
+import { Document, Page, pdfjs } from "react-pdf";
+import "react-pdf/dist/esm/Page/AnnotationLayer.css";
+import resumeLink from '../../Assets/cv-en.pdf';
+
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
+
+// const resumeLink = "https://raw.githubusercontent.com/zdienos/zdienos/main/cv-en.pdf";  
+
 
 function Resume() {
-  const uri = "https://porfolio-backend.vercel.app/ranks/getRanks";
-  const [spojRank, upadteSpojRank] = useState(0);
-  const [hackerrank, upadteHackerank] = useState(0);
-  const [sem, upadateSem] = useState(0);
-  const [cgpa, upadteCgpa] = useState(0);
+  const [width, setWidth] = useState(1200);
 
+  const [numPages, setNumPages] = useState(null);
+  const [pageNumber, setPageNumber] = useState(1);
+
+  function onDocumentLoadSuccess({ numPages }) {
+    setNumPages(numPages);
+    setPageNumber(1);    
+  }
+
+  function changePage(offset) {
+    setPageNumber(prevPageNumber => prevPageNumber + offset);
+  }
+
+  function previousPage() {
+    changePage(-1);
+  }
+
+  function nextPage() {
+    changePage(1);
+  }
+
+  
   useEffect(() => {
-    axios
-      .get(uri)
-      .then((res) => {
-        upadteSpojRank(res.data.message[0].spojRank);
-        upadteHackerank(res.data.message[1].hackerrank);
-        upadteCgpa(res.data.message[2].cgpa);
-        upadateSem(res.data.message[3].sem);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    setWidth(window.innerWidth);
   }, []);
 
   return (
-    <Container fluid className="resume-section">
-      <Particle />
-      <Container>
+    <div>
+      <Container fluid className="resume-section">
+        <Particle />
         <Row style={{ justifyContent: "center", position: "relative" }}>
           <Button variant="primary" href={pdf} target="_blank">
             <AiOutlineDownload />
             &nbsp;Download CV
           </Button>
         </Row>
+
         <Row className="resume">
-          <Col md={6} className="resume-left">
-            <h3 className="resume-title">Experience</h3>
-            <Resumecontent
-              title="Frontend Developer Intern [Flash Tech]"
-              date="July 2021 - September 2021"
-              content={[
-                "Worked on the development of an E-commerce website",
-                "Redesigned Wigme.com and created features to enhance the user experience and optimized designs for smartphones.",
-                " Translated designs and wireframes into a highly responsive user interface and reusable components using React.js.",
-                "Used Back-End APIs to display data using the Custom Components, library Components, and Redux.",
-                "Used JIRA as the bug tracking system to track and maintain the history of bugs/issues on an everyday basis.",
-              ]}
-            />
-            <h3 className="resume-title">Extracurricular Activities</h3>
-            <Resumecontent
-              title="Web Developer [Pantheon-2019 Technical Fest of BIT Mesra]"
-              content={[
-                "Worked on building front-end UI design using HTML5, CSS3, JavaScript jQuery, and building API routes using Node and express.js.",
-              ]}
-            />
-          </Col>
-          <Col md={6} className="resume-right">
-            <h3 className="resume-title">Education</h3>
-            <Resumecontent
-              title="IMSC MATHS AND COMPUTING [BIT Mesra, Ranchi] "
-              date="2018 - Present"
-              content={[`CGPA: ${cgpa} (Till ${sem}th Sem)`]}
-            />
-
-            <h3 className="resume-title">Publications</h3>
-            <Resumecontent
-              title=""
-              content={[
-                "Article entitled An Overlapping Sliding Window and Combined Feature based Emotion Recognition System for EEG Signals publised in Emerald Publication;10.1108/ACI-05-2021-0130",
-              ]}
-            />
-
-            <h3 className="resume-title">Ranks and Achivements</h3>
-            <Resumecontent
-              title=""
-              content={[
-                `Current rank in Spoj ${spojRank}`,
-                `Current rank in HackerRank  ${hackerrank}`,
-                "Top Performer in Code-Break 1.0",
-                "Participant in Hack-A-Bit 2019",
-              ]}
-            />
-          </Col>
+          {/* <Document file={resumeLink}>
+            <Page pageNumber={1} scale={width > 786 ? 1.7 : 0.6} />
+          </Document> */}
+         
+         <Document
+            file={resumeLink}
+            onLoadSuccess={onDocumentLoadSuccess}
+            onClick={changePage}
+          >
+            <Page pageNumber={pageNumber} scale={width > 786 ? 1.7 : 0.6} />
+          </Document>          
         </Row>
-        <Row style={{ justifyContent: "center", position: "relative" }}>
-          <Button variant="primary" href={pdf} target="_blank">
-            <AiOutlineDownload />
-            &nbsp;Download CV
-          </Button>
+        <Row style={{ justifyContent: "center", position: "relative", top:-170}}>
+        <Button variant="primary" type="button"
+          disabled={pageNumber <= 1}
+          onClick={previousPage}
+        >
+           <AiFillCaretLeft />
+        </Button>
+        &nbsp;
+        <Button variant="primary" 
+          type="button"
+          disabled={pageNumber >= numPages}
+          onClick={nextPage}
+        >
+          <AiFillCaretRight />
+          
+        </Button>
         </Row>
       </Container>
-    </Container>
+    </div>
   );
 }
 
