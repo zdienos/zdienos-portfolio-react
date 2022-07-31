@@ -10,14 +10,14 @@ function Github() {
     grade3: "#6096BA",
     grade2: "#A3CEF1",
     grade1: "#8B8C89",
-    grade0: "#E7ECEF",
+    grade0: "#EFEFEF",
   };
   return (
     <Row style={{ justifyContent: "center", paddingBottom: "20px" }}>
-      <h1 className="project-heading" style={{ paddingBottom: "10px" }}>
+      <h2 className="project-heading" style={{ paddingBottom: "10px" }}>
         Days I <strong className="purple">Code</strong>
-      </h1>
-      <GitHubCalendar style={{ color:"black" }}
+      </h2>
+      <GitHubCalendar style={{ fill:"black" }}
         username="zdienos"
         blockSize={15}
         blockMargin={5}

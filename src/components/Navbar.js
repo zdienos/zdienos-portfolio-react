@@ -5,8 +5,8 @@ import Container from "react-bootstrap/Container";
 import logo from "../Assets/logo-zed.png";
 import { Link } from "react-router-dom";
 import { ImBlogger } from "react-icons/im";
-import {  
-  AiOutlineHome,  
+import {
+  AiOutlineHome,
   AiOutlineUser,
   AiOutlineAppstore,
 } from "react-icons/ai";
@@ -35,9 +35,9 @@ function NavBar() {
       className={navColour ? "sticky" : "navbar"}
     >
       <Container>
-        <Navbar.Brand href="/">
+        {/* <Navbar.Brand href="/">
           <img src={logo} className="img-fluid logo" alt="brand" />
-        </Navbar.Brand>
+        </Navbar.Brand> */}
         <Navbar.Toggle
           aria-controls="responsive-navbar-nav"
           onClick={() => {
@@ -72,10 +72,7 @@ function NavBar() {
                 to="/project"
                 onClick={() => updateExpanded(false)}
               >
-                <AiOutlineAppstore
-                  style={{ marginBottom: "2px" }}
-                />{" "}
-                Projects
+                <AiOutlineAppstore style={{ marginBottom: "2px" }} /> Portfolio
               </Nav.Link>
             </Nav.Item>
 
@@ -97,7 +94,7 @@ function NavBar() {
               >
                 <ImBlogger style={{ marginBottom: "2px" }} /> Blogs
               </Nav.Link>
-            </Nav.Item>         
+            </Nav.Item>
           </Nav>
         </Navbar.Collapse>
       </Container>

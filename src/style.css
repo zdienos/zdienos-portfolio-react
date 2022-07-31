@@ -152,7 +152,7 @@ html {
   .navbar {
     padding: 1rem 2rem !important;
     font-size: 1.4rem !important;
-    background-color: #181a27 !important;
+    /* background-color: #181a27 !important; */
   }
   .navbar-nav .nav-item a::after {
     display: none !important;
@@ -317,6 +317,17 @@ html {
 .myAvatar {
   justify-content: center !important;
   padding-top: 9em !important;
+  border-radius: 50%;
+}
+
+.img-avatar {  
+    /* position: relative; */
+    border-radius: 50%;
+    height: 240px;
+    width: 240px;
+    padding: 0;
+    margin: 0;
+    border: 2px solid var(--blue);    
 }
 
 @media (max-width: 767px) {
@@ -459,7 +470,7 @@ html {
 }
 
 .project-card {
-  padding-top: 50px !important;
+  padding-top: 30px !important;
   padding-bottom: 50px !important;
   padding-left: 25px !important;
   padding-right: 25px !important;
@@ -493,6 +504,13 @@ html {
   padding: 0px !important;
   opacity: 0.8 !important;
   border-radius: 0px !important;
+}
+
+.nav-pills .nav-link {
+  background: 0 0;
+  border: 0;
+  border-radius: 0.25rem;
+  padding: 0.4rem 1rem !important;
 }
 
 /* .btn-primary {
@@ -562,6 +580,12 @@ html {
 .tech-icon-images {
   padding: 20px !important;
   line-height: 1.6 !important;
+}
+
+.react-github-calendar svg text{
+  fill: var(--grey) !important;
+  font-size: 30px;
+  font-weight: bold;
 }
 
 .quote-card-view {
