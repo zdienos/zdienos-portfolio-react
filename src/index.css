@@ -1,13 +1,32 @@
+/* @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap"); */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Hind&display=swap');
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  /* font-family: "Monsterrat","Raleway", serif !important; */
+  font-family: "Montserrat", serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
+  /* background-image: linear-gradient(to left, rgb(14, 24, 83), rgb(16, 15, 35)); */
+  /* background-image: linear-gradient(to left, rgb(31, 36, 109), rgb(6, 16, 51)); */
+  /* background: #000428;  
+  background: -webkit-linear-gradient(to right, #004e92, #000428);  
+  background: linear-gradient(to right, #004e92, #000428);  */
+  
+  /* background: #525252;  /* fallback for old browsers */
+  /* background: -webkit-linear-gradient(to right, #092241, #525252);  /* Chrome 10-25, Safari 5.1-6 */
+  /* background: linear-gradient(to right, #061744, #020222); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  background: linear-gradient(to right, #E7ECEF, #E7ECEF);
+  
+
+  /* --blue-dark: #274C77; */
+  /* background-color: #18198a;   */
+
+  /* --white: #E7ECEF;
+  --grey: #8B8C89;
+  --blue: #6096BA;
+  --blue-light: #A3CEF1;
+  --blue-dark: #274C77; */
+  
 }

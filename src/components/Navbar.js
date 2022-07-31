@@ -2,14 +2,13 @@ import React, { useState } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Container from "react-bootstrap/Container";
-// import logo from "../Assets/logo.png";
-// import Button from "react-bootstrap/Button";
+import logo from "../Assets/logo-zed.png";
 import { Link } from "react-router-dom";
-import { ImBlog } from "react-icons/im";
+import { ImBlogger } from "react-icons/im";
 import {  
-  AiOutlineHome,
-  AiOutlineFundProjectionScreen,
+  AiOutlineHome,  
   AiOutlineUser,
+  AiOutlineAppstore,
 } from "react-icons/ai";
 
 import { CgFileDocument } from "react-icons/cg";
@@ -37,7 +36,7 @@ function NavBar() {
     >
       <Container>
         <Navbar.Brand href="/">
-          {/* <img src={logo} className="img-fluid logo" alt="brand" /> */}
+          <img src={logo} className="img-fluid logo" alt="brand" />
         </Navbar.Brand>
         <Navbar.Toggle
           aria-controls="responsive-navbar-nav"
@@ -45,7 +44,7 @@ function NavBar() {
             updateExpanded(expand ? false : "expanded");
           }}
         >
-          <span>sss</span>
+          <span></span>
           <span></span>
           <span></span>
         </Navbar.Toggle>
@@ -73,7 +72,7 @@ function NavBar() {
                 to="/project"
                 onClick={() => updateExpanded(false)}
               >
-                <AiOutlineFundProjectionScreen
+                <AiOutlineAppstore
                   style={{ marginBottom: "2px" }}
                 />{" "}
                 Projects
@@ -96,7 +95,7 @@ function NavBar() {
                 target="_blank"
                 rel="noreferrer"
               >
-                <ImBlog style={{ marginBottom: "2px" }} /> Blogs
+                <ImBlogger style={{ marginBottom: "2px" }} /> Blogs
               </Nav.Link>
             </Nav.Item>         
           </Nav>
