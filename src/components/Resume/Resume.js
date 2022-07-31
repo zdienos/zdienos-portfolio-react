@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
-import Particle from "../Particle";
 import pdf from "../../Assets/cv-en.pdf";
 import { AiOutlineDownload,  AiFillCaretLeft, AiFillCaretRight } from "react-icons/ai";
 import { Document, Page, pdfjs } from "react-pdf";
@@ -43,8 +42,7 @@ function Resume() {
 
   return (
     <div>
-      <Container fluid className="resume-section">
-        <Particle />
+      <Container fluid className="resume-section">        
         <Row style={{ justifyContent: "center", position: "relative" }}>
           <Button variant="primary" href={pdf} target="_blank">
             <AiOutlineDownload />

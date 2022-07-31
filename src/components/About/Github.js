@@ -17,12 +17,13 @@ function Github() {
       <h1 className="project-heading" style={{ paddingBottom: "10px" }}>
         Days I <strong className="purple">Code</strong>
       </h1>
-      <GitHubCalendar
+      <GitHubCalendar style={{ color:"black" }}
         username="zdienos"
         blockSize={15}
         blockMargin={5}
         theme={colourTheme}
         fontSize={16}
+        showWeekdayLabels="true"
       />
     </Row>
   );

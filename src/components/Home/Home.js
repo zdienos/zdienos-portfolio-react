@@ -1,15 +1,13 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import homeLogo from "../../Assets/home-main.svg";
-import Particle from "../Particle";
 import HomeSecond from "./HomeSecond";
 import Type from "./Type";
 
 function Home() {
   return (
     <section>
-      <Container fluid className="home-section" id="home">
-        <Particle />
+      <Container fluid className="home-section" id="home">        
         <Container className="home-content">
           <Row>
             <Col md={12} className="home-header">
