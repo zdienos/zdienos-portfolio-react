@@ -3,10 +3,8 @@ import { Col, Row } from "react-bootstrap";
 import {
   SiLinux,
   SiApple,
-  SiVisualstudiocode,
-  SiJupyter,
-  SiPostman,
-  SiHeroku,
+  SiVisualstudiocode,  
+  SiPostman,  
 } from "react-icons/si";
 import {
   DiTerminal,

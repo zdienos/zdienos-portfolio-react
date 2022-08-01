@@ -493,6 +493,7 @@ html {
   transform: scale(1.02) !important;
   overflow: hidden !important;
   box-shadow: 0 4px 4px 5px rgba(72, 83, 144, 0.561) !important;
+  opacity: 1 !important;
 }
 .card-title {
   color: var(--blue) !important;  

@@ -4,9 +4,11 @@ import myImg from "../../Assets/fotoME-min.jpg";
 import Tilt from "react-parallax-tilt";
 import {
   AiFillGithub,
+  AiFillMail,
+  AiFillMessage,
   AiOutlineTwitter,  
 } from "react-icons/ai";
-import { FaLinkedinIn, FaYoutube } from "react-icons/fa";
+import { FaLinkedinIn, FaMailBulk, FaTelegram, FaWhatsapp, FaYoutube } from "react-icons/fa";
 
 function HomeSecond() {
   return (
@@ -40,6 +42,16 @@ function HomeSecond() {
               Feel free to <span className="purple">connect </span>with me
             </p>
             <ul className="home-about-social-links">
+              <li className="social-icons">
+                <a
+                  href="mailto:mardinosantosa@gmail.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="icon-colour home-social-icons"
+                >
+                  <AiFillMail />
+                </a>
+              </li>
               <li className="social-icons">
                 <a
                   href="https://github.com/zdienos"
@@ -80,6 +92,26 @@ function HomeSecond() {
                   <FaYoutube />
                 </a>
               </li>
+              <li className="social-icons">
+                <a
+                  href="https://wa.me/+6285299977945/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="icon-colour home-social-icons"
+                >
+                  <FaWhatsapp />
+                </a>
+              </li>
+              <li className="social-icons">
+                <a
+                  href="https://t.me/zdienos"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="icon-colour home-social-icons"
+                >
+                  <FaTelegram />
+                </a>
+              </li>              
             </ul>
           </Col>
         </Row>
