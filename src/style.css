@@ -469,6 +469,7 @@ html {
   padding-top: 110px !important;
   padding-bottom: 10px !important;
   background-image: var(--section-background-color) !important;
+  min-height: 95vh;
 }
 
 .project-card {
@@ -486,6 +487,7 @@ html {
   opacity: 0.9 !important;
   transition: all 0.5s ease 0s !important;
   height: 100% !important;
+  background-color: #f7f7f7;
 }
 .project-card-view:hover {
   transform: scale(1.02) !important;
@@ -617,6 +619,7 @@ html {
   padding-bottom: 30px !important;
   background-image: var(--section-background-color) !important;
   color: var(--blue)  !important;
+  min-height: 95vh;
 }
 
 .resume {
