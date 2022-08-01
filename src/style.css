@@ -259,7 +259,8 @@ html {
 }
 
 .home-header {
-  padding-top: 80px !important;
+  /* padding-top: 80px !important; */
+  padding-top: 25vh !important;
 }
 
 .home-section {
@@ -271,6 +272,7 @@ html {
   background-repeat: no-repeat; 
   padding-bottom: 30px !important;
   padding-top: 30px !important;
+  background-size: cover;
 }
 
 .home-content {
