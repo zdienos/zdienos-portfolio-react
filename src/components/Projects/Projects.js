@@ -1,14 +1,35 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import ProjectCard from "./ProjectCards";
 
-import newdata from "../../Datas/data.json";
-// const newdata = "/data.json";
-const projects = newdata.projects;
+// import newdata from "../../Datas/data.json";
+//const projects = newdata.projects;
 
 function Projects() {
+  const [projects, setData] = useState([]);
+  const getData = () => {
+    fetch("data.json", {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    })
+      .then(function (response) {
+        // console.log(response);
+        return response.json();
+      })
+      .then(function (myJson) {
+        console.log('hereeee');
+        console.log(myJson);
+        setData(myJson);
+      });
+  };
+  useEffect(() => {
+    getData();
+  }, []);
+
   return (
     <Container fluid className="project-section">
       <Container>
@@ -22,14 +43,16 @@ function Projects() {
           style={{ justifyContent: "center", paddingTop: "20px" }}
           variant="pills"
         >
-          {projects &&
-            projects.map(({ key, title, data }) => (
-              <Tab eventKey={key} title={title}>
-                <Row style={{ justifyContent: "center", paddingBottom: "10px" }} >
+          {projects.projects &&
+            projects.projects.map(({ key, title, data }) => (
+              <Tab key={key} eventKey={key} title={title}>
+                <Row
+                  style={{ justifyContent: "center", paddingBottom: "10px" }}
+                >
                   {data &&
                     data.map(
                       ({ id, imgpath, isblog, title, description, link }) => (
-                        <Col md={4} className="project-card" key={id}>
+                        <Col xs={12} md={6} className="project-card" key={id}>
                           <ProjectCard
                             imgPath={imgpath}
                             isBlog={isblog}
