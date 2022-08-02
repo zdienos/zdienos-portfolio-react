@@ -1,0 +1,15 @@
+{
+    "name": "Mardino Santosa",
+    "short_name": "Mardino",
+    "start_url": "index.html",
+    "icons": [
+    {
+    "src": "images/icon/android-icon-192x192.png",
+    "sizes": "192x192",
+    "type": "image/png"
+    }    
+    ],
+    "background_color": "#274C77",
+    "display": "standalone",
+    "theme_color": "#274C77"
+   }
