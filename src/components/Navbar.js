@@ -56,7 +56,7 @@ function NavBar() {
                 updateExpanded(false);
                 setActive("/");
                 }}
-                className={`${active == "/" && 'm-active'}`}
+                className={`${active === "/" && 'm-active'}`}
                 >
                   
                 <AiOutlineHome style={{ marginBottom: "2px" }} /> Home
@@ -71,7 +71,7 @@ function NavBar() {
                   updateExpanded(false);
                   setActive("/about");
                 }}
-                className={` ${active == "/about" && 'm-active'}`}
+                className={` ${active === "/about" && 'm-active'}`}
               >
                 <AiOutlineUser style={{ marginBottom: "2px" }} /> About
               </Nav.Link>
@@ -85,7 +85,7 @@ function NavBar() {
                   updateExpanded(false);
                   setActive("/project");
                 }}
-                className={`${active == "/project" && 'm-active'}`}
+                className={`${active === "/project" && 'm-active'}`}
               >
                 <AiOutlineAppstore style={{ marginBottom: "2px" }} /> Portfolio
               </Nav.Link>
@@ -99,7 +99,7 @@ function NavBar() {
                   updateExpanded(false);
                   setActive("/resume");
                 }}
-                className={`${active == "/resume" && 'm-active'}`}
+                className={`${active === "/resume" && 'm-active'}`}
               >
                 <CgFileDocument style={{ marginBottom: "2px" }} /> Resume
               </Nav.Link>
@@ -108,8 +108,7 @@ function NavBar() {
             <Nav.Item>
               <Nav.Link
                 href="https://blog.zdienos.com/"
-                target="_blank"
-                rel="noreferrer"
+                target="_blank"                
               >
                 <ImBlogger style={{ marginBottom: "2px" }} /> Blogs
               </Nav.Link>

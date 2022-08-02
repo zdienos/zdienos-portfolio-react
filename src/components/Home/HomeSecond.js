@@ -3,12 +3,10 @@ import { Container, Row, Col } from "react-bootstrap";
 import myImg from "../../Assets/fotoME-min.jpg";
 import Tilt from "react-parallax-tilt";
 import {
-  AiFillGithub,
-  AiFillMail,
-  AiFillMessage,
+  AiFillGithub,  
   AiOutlineTwitter,  
 } from "react-icons/ai";
-import { FaLinkedinIn, FaMailBulk, FaTelegram, FaWhatsapp, FaYoutube } from "react-icons/fa";
+import { FaLinkedinIn, FaTelegram, FaWhatsapp, FaYoutube } from "react-icons/fa";
 
 function HomeSecond() {
   return (
