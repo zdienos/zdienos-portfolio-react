@@ -2,6 +2,8 @@
     "name": "Mardino Santosa",
     "short_name": "Mardino",
     "start_url": "index.html",
+    "description": "Mardino Santosa (zdienos) is a Network and System Administrator, Full Stack Developer, Hardware Maintainer",
+    "orientation": "any",
     "icons": [
     {
     "src": "images/icon/android-icon-192x192.png",

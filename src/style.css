@@ -188,6 +188,12 @@ html {
   }
 }
 
+.navbar-collapse { 
+  flex-grow: 0 !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
 .navbar-brand {
   color: rgb(250, 250, 250) !important;
 }
