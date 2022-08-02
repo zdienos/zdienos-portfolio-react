@@ -59,7 +59,9 @@ function Resume() {
             onLoadSuccess={onDocumentLoadSuccess}
             onClick={changePage}
           >
-            <Page pageNumber={pageNumber} scale={width > 786 ? 1.7 : 0.6} />
+            <Page pageNumber={pageNumber} 
+            scale={width > 786 ? 1.3 : 0.6} 
+            />
           </Document>
         </Row>
         <Row

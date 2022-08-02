@@ -16,6 +16,7 @@ import { CgFileDocument } from "react-icons/cg";
 function NavBar() {
   const [expand, updateExpanded] = useState(false);
   const [navColour, updateNavbar] = useState(false);
+  const [active, setActive] = useState(null);
 
   function scrollHandler() {
     if (window.scrollY >= 20) {
@@ -23,7 +24,7 @@ function NavBar() {
     } else {
       updateNavbar(false);
     }
-  }
+  }  
 
   window.addEventListener("scroll", scrollHandler);
 
@@ -51,7 +52,13 @@ function NavBar() {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="ml-auto" defaultActiveKey="#home">
             <Nav.Item>
-              <Nav.Link as={Link} to="/" onClick={() => updateExpanded(false)}>
+              <Nav.Link as={Link} to="/" onClick={() => {
+                updateExpanded(false);
+                setActive("/");
+                }}
+                className={`${active == "/" && 'm-active'}`}
+                >
+                  
                 <AiOutlineHome style={{ marginBottom: "2px" }} /> Home
               </Nav.Link>
             </Nav.Item>
@@ -60,7 +67,11 @@ function NavBar() {
               <Nav.Link
                 as={Link}
                 to="/about"
-                onClick={() => updateExpanded(false)}
+                onClick={() => {
+                  updateExpanded(false);
+                  setActive("/about");
+                }}
+                className={` ${active == "/about" && 'm-active'}`}
               >
                 <AiOutlineUser style={{ marginBottom: "2px" }} /> About
               </Nav.Link>
@@ -70,7 +81,11 @@ function NavBar() {
               <Nav.Link
                 as={Link}
                 to="/project"
-                onClick={() => updateExpanded(false)}
+                onClick={() => {
+                  updateExpanded(false);
+                  setActive("/project");
+                }}
+                className={`${active == "/project" && 'm-active'}`}
               >
                 <AiOutlineAppstore style={{ marginBottom: "2px" }} /> Portfolio
               </Nav.Link>
@@ -80,7 +95,11 @@ function NavBar() {
               <Nav.Link
                 as={Link}
                 to="/resume"
-                onClick={() => updateExpanded(false)}
+                onClick={() => {
+                  updateExpanded(false);
+                  setActive("/resume");
+                }}
+                className={`${active == "/resume" && 'm-active'}`}
               >
                 <CgFileDocument style={{ marginBottom: "2px" }} /> Resume
               </Nav.Link>

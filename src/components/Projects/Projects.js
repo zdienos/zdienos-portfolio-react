@@ -16,13 +16,10 @@ function Projects() {
         Accept: "application/json",
       },
     })
-      .then(function (response) {
-        // console.log(response);
+      .then(function (response) {        
         return response.json();
       })
-      .then(function (myJson) {
-        console.log('hereeee');
-        console.log(myJson);
+      .then(function (myJson) {        
         setData(myJson);
       });
   };
@@ -52,7 +49,7 @@ function Projects() {
                   {data &&
                     data.map(
                       ({ id, imgpath, isblog, title, description, link }) => (
-                        <Col xs={12} md={6} className="project-card" key={id}>
+                        <Col xs={12} md={6} lg={4} className="project-card" key={id}>
                           <ProjectCard
                             imgPath={imgpath}
                             isBlog={isblog}

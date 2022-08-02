@@ -209,8 +209,31 @@ html {
 
 @media (max-width: 767px) {
   .nav-link {
-    padding: 0.7rem 1rem !important;
+    padding: 0.2rem 0.2rem !important;
   }
+  .navbar-nav .nav-item a::after {
+    content: "";
+    position: relative !important;
+    display: block !important;
+    height: 3px;
+    width: 0;
+    border-radius: 16px;
+    background: var(--blue);
+    bottom: 1px;
+    left: 0;
+    z-index: -1;
+    transition: all 0.3s ease-out 0s;
+  } 
+  .navbar-nav .nav-item a:hover::after {
+    width: 100%;
+  }
+}
+@media (max-width: 430px) {
+.navbar-nav .nav-link {  
+  padding-right: 0.7rem !important;
+  padding-left: 0.7rem !important;
+  
+}
 }
 
 .navbar-nav .nav-item {
@@ -240,6 +263,22 @@ html {
 }
 
 .navbar-nav .nav-item a:hover::after {
+  width: 100%;
+}
+
+
+a.m-active.nav-link::after {
+  content: "";
+  position: relative;
+  display: block;
+  height: 3px;
+  width: 0;
+  border-radius: 16px;
+  background: var(--blue);
+  bottom: 1px;
+  left: 0;
+  z-index: -1;
+  transition: all 0.3s ease-out 0s;
   width: 100%;
 }
 
@@ -310,6 +349,34 @@ html {
   color: whitesmoke;    
 }
 
+@media (max-width: 1024px) {
+  .home-content {
+    padding: 6rem 0 2rem !important;
+    color: whitesmoke;    
+  }
+}
+
+@media (max-width: 916px) {
+  .home-content {
+    padding: 2rem 0 2rem !important;
+    color: whitesmoke;    
+  }
+}
+
+@media (max-width: 768px) {
+  .home-content {
+    padding: 4rem 0 2rem !important;
+    color: whitesmoke;    
+  }
+}
+
+@media (max-width: 480px) {
+  .home-content {
+    padding: 0.5rem 0 2rem !important;
+    color: whitesmoke;    
+  }
+}
+
 .heading {
   font-size: 2.4em !important;
   /* padding-left: 50px !important; */
@@ -372,7 +439,7 @@ html {
 .home-about-section {
   position: relative;
   padding-bottom: 20px !important;
-  padding-top: 20px !important;
+  padding-top: 20px !important;  
 }
 
 @media (max-width: 992px) {
@@ -451,6 +518,12 @@ html {
   display: inline-block !important;
   padding-right: 15px;
   padding-left: 15px;
+}
+@media (max-width: 480px) {
+  .social-icons {   
+    padding-right: 3px;
+    padding-left: 3px;
+  }
 }
 
 .icon-colour {
@@ -816,3 +889,11 @@ html {
 .fork-btn-inner::after {
   display: none !important;
 }
+
+
+
+/* .react-pdf__Page__canvas {
+  margin: 0 auto;
+  width: 90% !important;
+  height: 100% !important; 
+} */
