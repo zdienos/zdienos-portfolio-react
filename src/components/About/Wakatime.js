@@ -6,7 +6,8 @@ import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import fetchJsonp from "fetch-jsonp";
 
 // const WakaChartURL = 'https://wakatime.com/share/@zdienos/87859afd-b87c-4e94-899e-a42ffe0f7b72.json'; //last year
-const WakaChartURL = "https://wakatime.com/share/@zdienos/0f82529f-2922-478d-afab-5b78745f01a8.json"; //30 day
+// const WakaChartURL = "https://wakatime.com/share/@zdienos/0f82529f-2922-478d-afab-5b78745f01a8.json"; //30 day
+const WakaChartURL = 'https://wakatime.com/share/@zdienos/ba313035-ceeb-48b6-91fc-784abe4c4329.json'; //all the time
 
 am4core.useTheme(am4themes_animated);
 
@@ -50,11 +51,11 @@ function Wakatime() {
     categoryAxis.renderer.minGridDistance = 1;
     categoryAxis.renderer.inversed = true;
     categoryAxis.renderer.grid.template.disabled = true;
-    categoryAxis.title.text = "Language over last 90 days";
+    categoryAxis.title.text = "Languages all over time";
 
     let valueAxis = x.xAxes.push(new am4charts.ValueAxis());
     valueAxis.min = 0;
-    valueAxis.title.text = "Days";
+    
 
     let series = x.series.push(new am4charts.ColumnSeries());
     series.dataFields.categoryY = "name";
