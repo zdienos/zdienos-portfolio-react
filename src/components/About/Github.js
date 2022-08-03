@@ -15,7 +15,7 @@ function Github() {
   return (
     <Row style={{ justifyContent: "center", paddingBottom: "20px" }}>
       <h2 className="project-heading" style={{ paddingBottom: "10px" }}>
-        Days I <strong className="purple">Code</strong>
+        Days <strong className="purple"> I Code</strong>
       </h2>
       <GitHubCalendar style={{ fill:"black" }}
         username="zdienos"
@@ -24,6 +24,9 @@ function Github() {
         theme={colourTheme}
         fontSize={16}
         showWeekdayLabels="true"
+        transformData={"selectLastHalfYear"} 
+        hideTotalCount="false" 
+        hideColorLegend="false"
       />
     </Row>
   );

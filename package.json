@@ -1,5 +1,6 @@
 {
   "name": "zdienos-portfolio",
+  "homepage": "https://zdienos.com",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
