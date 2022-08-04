@@ -16,10 +16,22 @@ am4core.useTheme(am4themes_animated);
 function Wakatime() {
   const chart = useRef(null);
 
-  // function createChart(chartData) {
-  const createChart = (chartData) => {
+  useLayoutEffect(() => {
     let x = am4core.create("chartdiv", am4charts.XYChart);
 
+    x.paddingRight = 20;
+    
+      fetchJsonp(WakaChartURL)
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (response) {      
+          //console.log(response.data)
+          // zed = response.data;
+          
+   
+         
+  
     x.paddingRight = 20;
 
     x.cursor = new am4charts.XYCursor();
@@ -52,45 +64,20 @@ function Wakatime() {
       return target.dataItem.dataContext.color;
     });
 
-    // untuk label di setiap seriesnya
-    // let labelBullet = series.bullets.push(new am4charts.LabelBullet());
-    // labelBullet.label.horizontalCenter = "center";
-    // labelBullet.label.dx = 10;
-    // labelBullet.label.text =
-    //   "{values.valueX.workingValue.formatNumber('#.0as')}";
-    // labelBullet.locationX = 1;
-
-    // defaulnya untuk column dengan seriers yang sama, warnanya sama, tambahkan adapter untuk mengambil warna dari chart.colors set
-    // series.columns.template.adapter.add("fill", function (fill, target) {
-    //   return x.colors.getIndex(target.dataItem.index);
-    // });
-
     categoryAxis.sortBySeries = series;
-    x.data = chartData;
-
+        
+    x.data = response.data
     chart.current = x;
-    
-  };
 
-  useLayoutEffect(() => {
-    async function fetchData() {
-      await fetchJsonp(WakaChartURL)
-        .then(function (response) {
-          return response.json();
-        })
-        .then(function (response) {
-          createChart(response.data);
+  
         })
         .catch(function (ex) {
-          console.log("parsing failed", ex);
-        });
-    }
-    
-    fetchData();
+          console.log("parssings failed", ex);
+        });     
+        return () => {
+          x.dispose();
+        };
 
-    return () => {
-      chart.current.dispose();
-    };
   }, []);
 
   return (
