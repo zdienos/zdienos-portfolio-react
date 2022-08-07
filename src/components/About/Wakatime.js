@@ -12,6 +12,7 @@ const WakaChartURL =
 // const WakaChartURL =  "https://wakatime.com/share/@zdienos/618218b9-cc3f-4100-bcf5-5f1e6c0a76d6.json"; //last 7 days
 
 am4core.useTheme(am4themes_animated);
+am4core.options.autoDispose = true;
 
 function Wakatime() {
   const chart = useRef(null);
@@ -89,7 +90,7 @@ function Wakatime() {
     fetchData();
 
     return () => {
-      chart.current.dispose();
+      chart.current && chart.current.dispose();
     };
   }, []);
 

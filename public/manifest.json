@@ -1,17 +1,22 @@
 {
-    "name": "Mardino Santosa",
-    "short_name": "Mardino",
-    "start_url": "index.html",
-    "description": "Mardino Santosa (zdienos) is a Network and System Administrator, Full Stack Developer, Hardware Maintainer",
-    "orientation": "any",
-    "icons": [
-    {
-    "src": "images/icon/android-icon-192x192.png",
-    "sizes": "192x192",
-    "type": "image/png"
-    }    
-    ],
-    "background_color": "#E7ECEF",
-    "display": "standalone",
-    "theme_color": "#274C77"
-   }
+  "name": "Mardino Santosa",
+  "short_name": "Mardino",
+  "start_url": ".",
+  "description": "Mardino Santosa (zdienos) is a Network and System Administrator, Full Stack Developer, Hardware Maintainer",
+  "orientation": "any",
+  "icons": [
+  {
+  "src": "images/icon/android-icon-192x192.png",
+  "sizes": "192x192",
+  "type": "image/png"
+  },
+  {
+      "src": "images/icon/logo512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }   
+  ],
+  "background_color": "#274C77",
+  "display": "standalone",
+  "theme_color": "#274C77"
+ }
