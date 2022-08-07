@@ -34,6 +34,7 @@ function Wakatime() {
     categoryAxis.renderer.inversed = true;
     categoryAxis.renderer.grid.template.disabled = true;
     categoryAxis.title.text = "Languages over last year";
+    //categoryAxis.title.text.fill="#dedede";
 
     let valueAxis = x.xAxes.push(new am4charts.ValueAxis());
     valueAxis.min = 0;
@@ -46,12 +47,12 @@ function Wakatime() {
     series.columns.template.column.cornerRadiusBottomRight = 5;
     series.columns.template.column.cornerRadiusTopRight = 5;
 
-    series.columns.template.adapter.add("fill", function (fill, target) {
-      return target.dataItem.dataContext.color;
-    });
-    series.columns.template.adapter.add("stroke", function (fill, target) {
-      return target.dataItem.dataContext.color;
-    });
+    // series.columns.template.adapter.add("fill", function (fill, target) {
+    //   return target.dataItem.dataContext.color;
+    // });
+    // series.columns.template.adapter.add("stroke", function (fill, target) {
+    //   return target.dataItem.dataContext.color;
+    // });
 
     // untuk label di setiap seriesnya
     // let labelBullet = series.bullets.push(new am4charts.LabelBullet());
@@ -62,9 +63,9 @@ function Wakatime() {
     // labelBullet.locationX = 1;
 
     // defaulnya untuk column dengan seriers yang sama, warnanya sama, tambahkan adapter untuk mengambil warna dari chart.colors set
-    // series.columns.template.adapter.add("fill", function (fill, target) {
-    //   return x.colors.getIndex(target.dataItem.index);
-    // });
+    series.columns.template.adapter.add("fill", function (fill, target) {
+      return x.colors.getIndex(target.dataItem.index);
+    });
 
     categoryAxis.sortBySeries = series;
     x.data = chartData;

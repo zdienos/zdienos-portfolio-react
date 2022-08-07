@@ -9,7 +9,23 @@
 	--blue-dark: #274c77;
 	--navbar-bg: #274c77;
 	--navbar-bg-sticky: #274c77e6;
+	--background:#e7ecef;
+	--icon-color: #6096ba;
+	--icon-background: #e7ecef;
 }
+
+[data-theme='dark'] {	
+	--white: #e7ecef;
+	--grey: #274c77;
+	--blue: #8aaaff;
+	--blue-light: #5c96d8;
+	--blue-dark: #BBE1FA;
+	--navbar-bg: #071e38;
+	--navbar-bg-sticky: ##071e38af;
+	--background:#042142;
+	--icon-color:#a3cef1;
+	--icon-background: #042142;
+  }
 
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap");
 
@@ -19,7 +35,8 @@ body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;	
 	/* background: linear-gradient(to right, #e7ecef, #e7ecef);  */
-	background: #274c77; 
+	background: var(--background) !important; 
+	background-color: var(--background) !important;
 	--image-gradient: linear-gradient(to bottom left,
 	rgba(3, 38, 65, 0.678),
 	rgba(12, 10, 22, 0.863)); 
@@ -52,7 +69,7 @@ body {
 	width: 100%;
 	height: 100%;
 	z-index: 999999;
-	background-color: var(--blue-dark);
+	background-color: var(--background);
 	background-image: url(./Assets/double-ring.svg);
 	background-repeat: no-repeat;
 	background-position: center;
@@ -96,18 +113,14 @@ body {
 /* Navbar */
 /* ------ */
 .sticky {
-	background-color: rgba(39, 76, 119, 0.9) !important;
-	/* background-color: var(--blue-dark) !important; */
-	/* background-color: rgba(18, 34, 112, 0.74) !important; */
+	background-color: var(--navbar-bg-sticky) !important;	
 	transition: all 0.3s ease-out 0s !important;
 	box-shadow: 0px 10px 10px 0px rgba(5, 9, 29, 0.171) !important;
 	backdrop-filter: blur(15px) !important;
 }
 
 .navbar {
-	background-color: rgba(39, 76, 119, 1);
-	/* background-color: var(--blue-dark) !important; */
-	/* background-color: rgba(18, 34, 112, 0.74) !important; */
+	background-color: var(--navbar-bg);	
 	position: fixed !important;
 	transition: all 0.3s ease-out 0s !important;
 	padding: 0.1rem 2rem !important;
@@ -326,41 +339,6 @@ a.m-active.nav-link::after {
 	display: inline-block;
 }
 
-@keyframes wave-animation {
-	0% {
-		transform: rotate(0deg);
-	}
-
-	10% {
-		transform: rotate(14deg);
-	}
-
-	/* The following five values can be played with to make the waving more or less extreme */
-	20% {
-		transform: rotate(-8deg);
-	}
-
-	30% {
-		transform: rotate(14deg);
-	}
-
-	40% {
-		transform: rotate(-4deg);
-	}
-
-	50% {
-		transform: rotate(10deg);
-	}
-
-	60% {
-		transform: rotate(0deg);
-	}
-
-	/* Reset for the last half to pause */
-	100% {
-		transform: rotate(0deg);
-	}
-}
 
 #tsparticles {
 	position: fixed !important;
@@ -378,7 +356,7 @@ a.m-active.nav-link::after {
 .home-section {
 	position: relative;
 	height: 100vh;
-	z-index: -1;
+	/* z-index: -1; */
 	background-image: var(--image-gradient), url(./Assets/bg-min.jpg);
 	background-position: top center;
 	background-repeat: no-repeat;
@@ -485,6 +463,7 @@ a.m-active.nav-link::after {
 	position: relative;
 	padding-bottom: 20px !important;
 	padding-top: 20px !important;
+	background-color: var(--background) !important;
 }
 
 @media (max-width: 992px) {
@@ -528,8 +507,8 @@ a.m-active.nav-link::after {
 	height: 40px !important;
 	text-align: center !important;
 	font-size: 1.2em !important;
-	line-height: 2em !important;
-	background: rgba(255, 255, 255, 0.972) !important;
+	line-height: 2em !important;	
+	background: var(--icon-background) !important;
 	border-radius: 50% !important;
 	transition: 0.5s !important;
 }
@@ -572,8 +551,8 @@ a.m-active.nav-link::after {
 	}
 }
 
-.icon-colour {
-	color: var(--blue) !important;
+.icon-colour {	
+	color: var(--icon-color) !important;
 }
 
 /* --------- */
@@ -634,6 +613,7 @@ a.m-active.nav-link::after {
 	padding-bottom: 10px !important;
 	background-image: var(--section-background-color) !important;
 	min-height: 95vh;
+	background-color: var(--background) !important;
 }
 
 @media (max-width: 992px) {
@@ -647,7 +627,7 @@ a.m-active.nav-link::after {
 	padding-bottom: 50px !important;
 	padding-left: 25px !important;
 	padding-right: 25px !important;
-	height: auto !important;
+	height: auto !important;	
 }
 
 .project-card-view {
@@ -656,8 +636,8 @@ a.m-active.nav-link::after {
 	background-color: transparent !important;
 	opacity: 0.9 !important;
 	transition: all 0.5s ease 0s !important;
-	height: 100% !important;
-	background-color: #f7f7f7 !important;
+	height: 100% !important;	
+	background-color: var(--background) !important;
 }
 
 .project-card-view:hover {
@@ -712,6 +692,7 @@ a.m-active.nav-link::after {
 	padding-bottom: 20px !important;
 	background-image: var(--section-background-color) !important;
 	color: var(--blue) !important;
+	background-color: var(--background) !important;
 }
 
 @media (max-width: 992px) {
@@ -735,7 +716,7 @@ a.m-active.nav-link::after {
 	overflow: hidden !important;
 	transition: all 0.4s ease 0s !important;
 	color: var(--blue-dark) !important;
-	background-color: #f7f7f7;
+	background-color: var(--icon-background);
 }
 
 @media (max-width: 767px) {
@@ -791,6 +772,7 @@ a.m-active.nav-link::after {
 	background-image: var(--section-background-color) !important;
 	color: var(--blue) !important;
 	min-height: 95vh;
+	background-color: var(--background) !important;
 }
 
 @media (max-width: 992px) {
@@ -941,4 +923,103 @@ a.m-active.nav-link::after {
 	margin: 0 auto;
 	width: 90% !important;
 	height: 100% !important; 
+  }
+
+
+  .btn-switch {
+	color: var(--white);
+	background-color: var(--background);
+	border: 2px var(--white) solid;
+	float: right;
+	transition: all .5s;
+	position: absolute;
+	z-index: 99;
+	margin-top: 150px;
+  }
+
+
+  .toggle-checkbox {
+	position: absolute;
+	opacity: 0;
+	cursor: pointer;
+	height: 0;
+	width: 0;
+	z-index:9999;
+  }
+  
+  .toggle-slot {
+	position: relative;
+	height: 2em;
+	width: 5em;
+	border: 2px solid #e4e7ec;
+	border-radius: 3em;
+	background-color: white;
+	box-shadow: 0px 5px 10px #e4e7ec;
+	transition: background-color 250ms;
+	z-index:9999;
+  }
+  
+  .toggle-checkbox:checked ~ .toggle-slot {
+	background-color: #374151;
+  }
+  
+  .toggle-button {
+	transform: translate(2.9em, 0);
+	position: absolute;
+	height: 2em;
+	width: 2em;
+	border-radius: 50%;
+	background-color: #ffeccf;
+	box-shadow: inset 0px 0px 0px 0.2em #ffbb52;
+	transition: background-color 250ms, border-color 250ms, transform 500ms cubic-bezier(.26,2,.46,.71);
+  }
+  
+  .toggle-checkbox:checked ~ .toggle-slot .toggle-button {
+	background-color: #485367;
+	box-shadow: inset 0px 0px 0px 0.2em white;
+	transform: translate(0.1em, 0);
+  }
+  
+  .sun-icon {
+	position: absolute;
+	height: 2em;
+	width: 2em;
+	color: #ffbb52;
+  }
+  
+  .sun-icon-wrapper {
+	position: absolute;
+	height: 2em;
+	width: 2em;
+	opacity: 1;
+	transform: translate(0.2em, 0em) rotate(15deg);
+	transform-origin: 50% 50%;
+	transition: opacity 150ms, transform 500ms cubic-bezier(.26,2,.46,.71);
+  }
+  
+  .toggle-checkbox:checked ~ .toggle-slot .sun-icon-wrapper {
+	opacity: 0;
+	transform: translate(3em, 2em) rotate(0deg);
+  }
+  
+  .moon-icon {
+	position: absolute;
+	height: 2em;
+	width: 2em;
+	color: white;
+  }
+  
+  .moon-icon-wrapper {
+	position: absolute;
+	height: 2em;
+	width: 2em;
+	opacity: 0;
+	transform: translate(2.9em, 2em) rotate(0deg);
+	transform-origin: 50% 50%;
+	transition: opacity 150ms, transform 500ms cubic-bezier(.26,2.5,.46,.71);
+  }
+  
+  .toggle-checkbox:checked ~ .toggle-slot .moon-icon-wrapper {
+	opacity: 1;
+	transform: translate(2.9em, 0em) rotate(-15deg);
   }

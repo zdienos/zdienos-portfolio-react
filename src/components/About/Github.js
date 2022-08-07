@@ -4,13 +4,13 @@ import { Row } from "react-bootstrap";
 
 function Github() {
   const colourTheme = {
-    background: "transparent",
-    text: "#ffffff",
-    grade4: "#274C77",
-    grade3: "#6096BA",
-    grade2: "#A3CEF1",
-    grade1: "#8B8C89",
-    grade0: "#EFEFEF",
+    // background: "transparent",
+    text: "#274c77",
+    grade4: "#DEB6AB",
+    grade3: "#ECCCB2",
+    grade2: "#ECCCB2",
+    grade1: "#F5E8C7",
+    grade0: "#F2D7D9",
   };
   return (
     <Row style={{ justifyContent: "center", paddingBottom: "20px" }}>
@@ -21,7 +21,8 @@ function Github() {
         username="zdienos"
         blockSize={15}
         blockMargin={5}
-        theme={colourTheme}
+        // theme={colourTheme}
+        color={"#80558C"}
         fontSize={16}
         showWeekdayLabels="true"
         transformData={"selectLastHalfYear"} 
