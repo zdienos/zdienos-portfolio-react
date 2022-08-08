@@ -52,20 +52,21 @@ function Main() {
       {/* <Preloader load={load} /> */}
       <div className="App" id={load ? "no-scroll" : "scroll"} data-theme={theme}> 
       {/* <Suspense fallback={<h1>Still Loading…</h1>}> */}
-      <button href="#" className="btn-switch" onClick={switchTheme}>Switch ssssss </button>
-      <label>
-        <input class='toggle-checkbox' type='checkbox' onClick={switchTheme}></input>
-        <div class='toggle-slot'>
-          <div class='sun-icon-wrapper'>
-            <BsFillSunFill className="sun-icon"/>
+      
+        <label className="float" >
+          <input className='toggle-checkbox' type='checkbox' onClick={switchTheme}></input>
+          <div className='toggle-slot'>
+            <div className='moon-icon-wrapper'>
+              <BsFillSunFill className="sun-icon"/>
+            </div>
+            <div className='toggle-button'></div>
+            <div className='sun-icon-wrapper'>
+              <div className="bi bi-moon"></div>
+              <BsFillMoonFill className="moon-icon"/>
+            </div>
           </div>
-          <div class='toggle-button'></div>
-          <div class='moon-icon-wrapper'>
-            <div class="bi bi-moon"></div>
-            <BsFillMoonFill className="moon-icon"/>
-          </div>
-        </div>
-      </label>
+        </label>
+
       <Suspense fallback={<Preloader />}> <Navbar /> </Suspense>
       <Suspense fallback={<Preloader />}>   <ScrollToTop /> </Suspense>
       <Suspense fallback={<Preloader />}>  

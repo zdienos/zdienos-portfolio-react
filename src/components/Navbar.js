@@ -15,7 +15,7 @@ import { CgFileDocument } from "react-icons/cg";
 function NavBar() {
   const [expand, updateExpanded] = useState(false);
   const [navColour, updateNavbar] = useState(false);
-  const [active, setActive] = useState(null);
+  const [active, setActive] = useState('/');
 
   function scrollHandler() {
     if (window.scrollY >= 20) {
