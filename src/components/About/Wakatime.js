@@ -5,11 +5,10 @@ import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import fetchJsonp from "fetch-jsonp";
 
-const WakaChartURL =
-  "https://wakatime.com/share/@zdienos/87859afd-b87c-4e94-899e-a42ffe0f7b72.json"; //last year
+// const WakaChartURL =  "https://wakatime.com/share/@zdienos/87859afd-b87c-4e94-899e-a42ffe0f7b72.json"; //last year
 // const WakaChartURL = "https://wakatime.com/share/@zdienos/0f82529f-2922-478d-afab-5b78745f01a8.json"; //30 day
 // const WakaChartURL = 'https://wakatime.com/share/@zdienos/ba313035-ceeb-48b6-91fc-784abe4c4329.json'; //all the time
-// const WakaChartURL =  "https://wakatime.com/share/@zdienos/618218b9-cc3f-4100-bcf5-5f1e6c0a76d6.json"; //last 7 days
+const WakaChartURL =  "https://wakatime.com/share/@zdienos/618218b9-cc3f-4100-bcf5-5f1e6c0a76d6.json"; //last 7 days
 
 am4core.useTheme(am4themes_animated);
 am4core.options.autoDispose = true;
@@ -33,7 +32,7 @@ function Wakatime() {
     categoryAxis.renderer.minGridDistance = 1;
     categoryAxis.renderer.inversed = true;
     categoryAxis.renderer.grid.template.disabled = true;
-    categoryAxis.title.text = "Languages over last year";
+    categoryAxis.title.text = "Languages over last 7 days";
     //categoryAxis.title.text.fill="#dedede";
 
     let valueAxis = x.xAxes.push(new am4charts.ValueAxis());
