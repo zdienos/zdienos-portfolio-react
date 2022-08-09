@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 
 import {
@@ -7,6 +7,7 @@ import {
   AiFillCaretLeft,
   AiFillCaretRight,
 } from "react-icons/ai";
+
 import { Document, Page, pdfjs } from "react-pdf";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 
@@ -45,14 +46,10 @@ function Resume() {
 
   return (
     <div>
-      <Container fluid className="resume-section">
-        <Row style={{ justifyContent: "center", position: "relative" }}>
-          <Button variant="primary" href={resumeLink} target="_blank">
-            <AiOutlineDownload />
-            &nbsp;Download CV
-          </Button>
-        </Row>
-
+      <Container fluid className="resume-section">   
+        <Row>
+        {!onDocumentLoadSuccess && <div id={"spin-loader"}/>}
+        </Row>           
         <Row className="resume">
           <Document
             file={resumeLink}
@@ -86,6 +83,14 @@ function Resume() {
               <AiFillCaretRight />
             </Button>
           </div>
+        </Row>
+        <Row style={{ justifyContent: "center", position: "relative" }}>
+          <Col className="md-5">
+          <Button variant="primary" href={resumeLink} target="_blank">
+            <AiOutlineDownload />
+            &nbsp;Download CV
+          </Button>
+          </Col>
         </Row>
       </Container>
     </div>
