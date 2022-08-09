@@ -12,6 +12,7 @@
 	--background:#e7ecef;
 	--icon-color: #6096ba;
 	--icon-background: #e7ecef;
+	--image-gradient: linear-gradient(to bottom left, rgba(3, 38, 65, 0.678), rgba(12, 10, 22, 0.863));	
 }
 
 [data-theme='dark'] {	
@@ -25,6 +26,7 @@
 	--background:#042142;
 	--icon-color:#a3cef1;
 	--icon-background: #042142;
+	--image-gradient: linear-gradient(to bottom left, rgb(0 0 0 / 68%), rgb(2 0 10 / 86%));
   }
 
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap");
@@ -37,18 +39,9 @@ body {
 	/* background: linear-gradient(to right, #e7ecef, #e7ecef);  */
 	background: var(--background) !important; 
 	background-color: var(--background) !important;
-	--image-gradient: linear-gradient(to bottom left,
-	rgba(3, 38, 65, 0.678),
-	rgba(12, 10, 22, 0.863)); 
+	
 }
 
-
-/* html {		 */
-	/* background-color: #274c77; */
-	/* --image-gradient: linear-gradient(to bottom left,
-	rgba(3, 38, 65, 0.678),
-	rgba(12, 10, 22, 0.863)); */
-/* } */
 
 .myblue {
 	color: var(--imp-text-color) !important;
@@ -918,25 +911,19 @@ a.m-active.nav-link::after {
 }
 
 
-
 .react-pdf__Page__canvas {
 	margin: 0 auto;
 	width: 90% !important;
 	height: 100% !important; 
   }
 
-
   .float{
 	position:fixed;
-	width:60px;
-	height:60px;
-	top:30px;
-	right:80px;	
-	z-index:9999;
-}
-
-.my-float{
-	margin-top:22px;
+	/* width:60px;
+	height:60px; */
+	top:10px;
+	right:40px;	
+	z-index:9999;	
 }
 
   .toggle-checkbox {
@@ -953,21 +940,7 @@ a.m-active.nav-link::after {
 	z-index:9999;
   }
   
-  
-  .toggle-button {
-	/* transform: translate(2.9em, 0); */
-	position: absolute;
-	height: 2em;
-	width: 2em;
-	/* border-radius: 50%; */
-	/* background-color: #ffeccf; */
-	/* box-shadow: inset 0px 0px 0px 0.2em #ffbb52; */
-	/* transition: background-color 250ms, border-color 250ms, transform 500ms cubic-bezier(.26,2,.46,.71); */
-  }
-  
-  .toggle-checkbox:checked ~ .toggle-slot .toggle-button {
-	/* background-color: #485367; */
-	/* box-shadow: inset 0px 0px 0px 0.2em white; */
+  .toggle-checkbox:checked ~ .toggle-slot .toggle-button {	
 	transform: translate(0.1em, 0);
   }
   
@@ -975,46 +948,44 @@ a.m-active.nav-link::after {
 	position: absolute;
 	height: 2em;
 	width: 2em;
-	color: #fff5ab;
-    filter: drop-shadow(1px 3px 5px rgba(224, 240, 5, 1));
+	color: #fdfdfd;
+    filter: drop-shadow(1px 3px 5px rgb(234, 235, 223));
+	cursor: pointer;
   }
   
   .sun-icon-wrapper {
-	position: absolute;
-	height: 2em;
-	width: 2em;
-	opacity: 1;
-	transform: translate(2.9em, -1.2em) rotate(15deg);
+	position: absolute;	
+	opacity: 1;	
+	transform: translate(-0.5em, 0.2em) rotate(15deg);
 	transform-origin: 50% 50%;
 	transition: opacity 150ms, transform 500ms cubic-bezier(.26,2,.46,.71);
   }
   
   .toggle-checkbox:checked ~ .toggle-slot .sun-icon-wrapper {
-	opacity: 0;
-	transform: translate(3em, 2em) rotate(0deg);
+	opacity: 0;	
+	transform: translate(3em, -3em) rotate(178deg)
   }
   
   .moon-icon {
 	position: absolute;
-	height: 1.8em;
-	width: 1.8em;
+	height: 1.6em;
+	width: 1.6em;
 	color: white;
-	filter: drop-shadow(1px 0px 8px rgb(255, 255, 255));
+	filter: drop-shadow(1px 0px 3px rgb(255, 255, 255));
+	cursor: pointer;
   }
   
   .moon-icon-wrapper {
-	position: absolute;
-	height: 2em;
-	width: 2em;
-	opacity: 0;
-	transform: translate(2.9em, 2em) rotate(0deg);
+	position: absolute;	
+	opacity: 0;	
+	transform: translate(0em, 4em) rotate(0deg);
 	transform-origin: 50% 50%;
 	transition: opacity 150ms, transform 500ms cubic-bezier(.26,2.5,.46,.71);
   }
   
   .toggle-checkbox:checked ~ .toggle-slot .moon-icon-wrapper {
-	opacity: 1;
-	transform: translate(2.9em, -0.5em) rotate(-15deg);
+	opacity: 1;	
+	transform: translate(0em, 0em) rotate(50deg);
   }
 
   svg {
