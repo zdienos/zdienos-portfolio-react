@@ -28,8 +28,9 @@ const DarkModeToggle = () => {
   };
 
   return (
-    <label className="float">
+    <label aria-label="floating-label" className="float">
       <input
+        aria-label="floating"
         className="toggle-checkbox"
         type="checkbox"
         defaultChecked={checked}

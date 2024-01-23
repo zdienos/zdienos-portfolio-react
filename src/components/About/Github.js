@@ -3,15 +3,15 @@ import GitHubCalendar from "react-github-calendar";
 import { Row } from "react-bootstrap";
 
 function Github() {
-  const colourTheme = {
+  // const colourTheme = {
     // background: "transparent",
-    text: "#274c77",
-    grade4: "#DEB6AB",
-    grade3: "#ECCCB2",
-    grade2: "#ECCCB2",
-    grade1: "#F5E8C7",
-    grade0: "#F2D7D9",
-  };
+    // text: "#274c77",
+  //   grade4: "#DEB6AB",
+  //   grade3: "#ECCCB2",
+  //   grade2: "#ECCCB2",
+  //   grade1: "#F5E8C7",
+  //   grade0: "#F2D7D9",
+  // };
   return (
     <Row style={{ justifyContent: "center", paddingBottom: "20px" }}>
       <h2 className="project-heading" style={{ paddingBottom: "10px" }}>

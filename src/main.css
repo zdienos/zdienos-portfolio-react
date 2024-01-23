@@ -362,9 +362,9 @@ a.m-active.nav-link::after {
 	position: relative;
 	height: 100vh;
 	/* z-index: -1; */
-	background-image: var(--image-gradient), url(./Assets/bg-min.jpg);
+	/* background-image: var(--image-gradient), url(./Assets/bg-min.jpg);
 	background-position: top center;
-	background-repeat: no-repeat;
+	background-repeat: no-repeat; */
 	padding-bottom: 30px !important;
 	padding-top: 30px !important;
 	background-size: cover;

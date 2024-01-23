@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import axios from "axios";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import ProjectCard from "./ProjectCards";
-import Preloader from "../Pre";
+// import Preloader from "../Pre";
 
 const npointURL = "https://api.npoint.io/b5c3511ff95746384e06";
 
@@ -23,9 +23,10 @@ function Projects() {
     setLoading(false);
   };
 
-  useEffect(() => {
+  // useEffect(() => {
     getData();
-  }, []);
+  // }, [])
+
 
   return (
     <Container fluid className="project-section">

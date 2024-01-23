@@ -43,6 +43,8 @@ function HomeSecond() {
               <li className="social-icons">
                 <a
                   href="https://github.com/zdienos"
+                  alt="Github"
+                  aria-label="Check my Github"
                   target="_blank"
                   rel="noreferrer"
                   className="icon-colour home-social-icons"
@@ -53,6 +55,8 @@ function HomeSecond() {
               <li className="social-icons">
                 <a
                   href="https://twitter.com/zdienos"
+                  aria-label="Tweet my X"
+                  alt="Twitter"
                   target="_blank"
                   rel="noreferrer"
                   className="icon-colour home-social-icons"
@@ -63,6 +67,8 @@ function HomeSecond() {
               <li className="social-icons">
                 <a
                   href="https://www.linkedin.com/in/zdienos/"
+                  aria-label="Find me on Linkedin"
+                  alt="Linkedin"
                   target="_blank"
                   rel="noreferrer"
                   className="icon-colour home-social-icons"
@@ -73,6 +79,8 @@ function HomeSecond() {
               <li className="social-icons">
                 <a
                   href="https://www.youtube.com/zdienos/"
+                  aria-label="Watch my Videos"
+                  alt="Youtube"
                   target="_blank"
                   rel="noreferrer"
                   className="icon-colour home-social-icons"
@@ -83,6 +91,8 @@ function HomeSecond() {
               <li className="social-icons">
                 <a
                   href="https://wa.me/+6285299977945/"
+                  aria-label="WA me"
+                  alt="Whatsapp"
                   target="_blank"
                   rel="noreferrer"
                   className="icon-colour home-social-icons"
@@ -93,6 +103,8 @@ function HomeSecond() {
               <li className="social-icons">
                 <a
                   href="https://t.me/zdienos"
+                  aria-label="Contact me on Telegram"
+                  alt="Telegram"
                   target="_blank"
                   rel="noreferrer"
                   className="icon-colour home-social-icons"
