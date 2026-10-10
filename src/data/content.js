@@ -21,7 +21,7 @@ export const routeToSection = {
 };
 
 export const FIRST_YEAR = 2007;
-export const LAST_YEAR = 2022;
+export const LAST_YEAR = 2023;
 
 // From cv-en.pdf
 export const experience = [
@@ -42,7 +42,7 @@ export const experience = [
   {
     from: 2009,
     to: 2019,
-    org: "Transstudio Themepark Makassar",
+    org: "Transstudio Theme Park Makassar",
     role: "System & Hardware Administrator",
     note: "Ten years running the park's networks, security systems, SQL Server and every Windows and Mac on site — plus the internal apps the team relied on.",
   },
@@ -55,9 +55,9 @@ export const experience = [
   },
   {
     from: 2019,
-    to: 2022,
-    org: "Kumalagroup",
-    role: "Administrator & Full Stack Developer",
+    to: 2023,
+    org: "Kumalagroup Makassar",
+    role: "System Administrator & Full Stack Developer",
     note: "Hyper-V, Windows Server 2019 and Linux in the back room; LAMP and Node.js environments for the dev team; internal web apps on CodeIgniter, Laravel and MariaDB.",
   },
 ];
@@ -87,10 +87,11 @@ export const wins = [
 // Small things built along the way, not in the project feed
 export const sideProjects = [
   { name: "Attendance software", where: "Chambers Distro Outlet, 2010", tech: "Visual FoxPro" },
-  { name: "Performer Utilization Score", where: "Transstudio Themepark", tech: "Scores show cast talent" },
-  { name: "TelePrompter", where: "Transstudio Themepark", tech: "Text for news readers" },
+  { name: "Performer Utilization Score", where: "Transstudio Theme Park", tech: "Scores show cast talent" },
+  { name: "TelePrompter", where: "Transstudio Theme Park", tech: "Text for news readers" },
   { name: "Telegram deploy bot", where: "For developers", tech: "Pulls repos to branches and servers" },
   { name: "Telegram MikroTik bot", where: "For PPPoE users", tech: "Checks and changes IP addresses" },
+  { name: "Telegram SNORT bot", where: "For the server room", tech: "Extra notifications for SNORT alerts" },
 ];
 
 export const websites = [
@@ -105,11 +106,14 @@ export const websites = [
   "smansa86makassar.org",
   "e-dinarcoin.id",
   "gudangupil.com",
-  "aplikasindo.com",
+  "portal.kumalagroup.co.id",
+  "kumalagroup.id",
+  "mazdakumala.com",
+  "honda-kmg.com",
 ];
 
 export const kit = [
-  { group: "Servers", items: ["Linux", "Windows Server 2019", "Hyper-V", "Bash"] },
+  { group: "Servers", items: ["Linux", "Windows Server 2019", "Hyper-V", "Bash Shell"] },
   { group: "Hosting", items: ["LAMP", "CentOS Web Panel", "aaPanel", "Docker"] },
   { group: "Network", items: ["MikroTik", "Cisco"] },
   { group: "Web", items: ["HTML", "CSS", "JavaScript", "jQuery", "PHP", "CodeIgniter", "Laravel", "Node.js", "REST APIs"] },

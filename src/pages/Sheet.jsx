@@ -129,8 +129,8 @@ function Portrait() {
 
 function Years() {
   return (
-    <Plate id="years" no="01" title="Fifteen years, five desks">
-      <Stair lines={["Fifteen years,", "five desks."]} className="mb-14" />
+    <Plate id="years" no="01" title="Sixteen years, five desks">
+      <Stair lines={["Sixteen years,", "five desks."]} className="mb-14" />
       <Timeline />
       <ol className="mt-14 grid gap-x-6 gap-y-10 md:grid-cols-2 xl:grid-cols-3">
         {[...experience].reverse().map(({ from, to, org, role, note }) => (
