@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import Plate, { Stair } from "../components/Plate";
-import Halftone from "../components/Halftone";
+import Misregister from "../components/Misregister";
 import Timeline from "../components/Timeline";
 import Work from "../components/Work";
 import Pulse from "../components/Pulse";
 import { contacts, education, EMAIL, experience, kit, wins } from "../data/content";
-import portrait from "../Assets/fotoME-min.jpg";
+import portrait from "../Assets/portrait-drawing.jpg";
 
 const YEAR = new Date().getFullYear();
 
@@ -53,24 +53,34 @@ function Hero() {
 }
 
 function Portrait() {
-  const [showPhoto, setShowPhoto] = useState(false);
+  const [plain, setPlain] = useState(false);
   return (
     <section className="grid border-b-2 border-ink md:grid-cols-12">
       <figure className="relative border-b-2 border-ink md:col-span-5 md:border-b-0 md:border-r-2">
-        {showPhoto ? (
-          <img src={portrait} alt="Photo of Mardino Santosa" className="block w-full" />
+        {plain ? (
+          <img
+            src={portrait}
+            alt="Line drawing of Mardino Santosa"
+            width="768"
+            height="1365"
+            className="block h-auto w-full dark:invert"
+          />
         ) : (
-          <Halftone src={portrait} alt="Halftone portrait of Mardino Santosa" ratio="1 / 1" cell={7} />
+          <Misregister
+            src={portrait}
+            alt="Line drawing of Mardino Santosa, printed in three slightly misaligned inks"
+            ratio="768 / 1365"
+          />
         )}
         <figcaption className="label flex items-center justify-between gap-4 border-t-2 border-ink px-4 py-3">
-          <span>Fig. 1 — The author, {showPhoto ? "as photographed" : "in two inks"}</span>
+          <span>Fig. 1 — The author, {plain ? "as drawn" : "off register"}</span>
           <button
             type="button"
-            onClick={() => setShowPhoto((v) => !v)}
+            onClick={() => setPlain((v) => !v)}
             className="shrink-0 hover:text-magenta"
-            aria-pressed={showPhoto}
+            aria-pressed={plain}
           >
-            {showPhoto ? "Halftone" : "Photo"} ↺
+            {plain ? "Print" : "Drawing"} ↺
           </button>
         </figcaption>
       </figure>
@@ -82,6 +92,22 @@ function Portrait() {
             Then spent the career making sure the Wi-Fi does.
           </span>
         </p>
+        <figure className="relative max-w-xl pt-14 md:ml-[12%]">
+          <span
+            aria-hidden="true"
+            className="overprint absolute -top-12 left-0 text-[9rem] font-black leading-none text-cyan"
+          >
+            “
+          </span>
+          <blockquote className="relative text-xl leading-snug tracking-tight md:text-2xl">
+            A hard-working IT administrator skilled at managing networking
+            systems, maintaining security systems, updating hardware and
+            software, and managing databases.
+          </blockquote>
+          <figcaption className="label mt-4 text-soft">
+            — Personal summary, cv-en.pdf
+          </figcaption>
+        </figure>
         <dl className="grid gap-x-6 gap-y-4 sm:grid-cols-2">
           {education.map(({ from, to, org, what }) => (
             <div key={org} className="border-t-2 border-ink pt-2">

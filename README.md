@@ -2,7 +2,7 @@
 
 Personal site of Mardino Santosa, set as a Swiss New Wave broadsheet: one long
 page of plates in two overprinting spot inks (cyan and magenta), stepped
-type, and a portrait redrawn as a halftone screen on a canvas.
+type, and a line-drawn portrait printed off register on a canvas.
 
 ## Stack
 
