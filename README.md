@@ -84,5 +84,5 @@ always skipped.
 - `public/.htaccess`: HTTPS redirect, single-page-app fallback to
   `index.html`, no-cache for entry points.
 - `public/assets/.htaccess`: one-year cache for hashed build files.
-- `public/service-worker.js`: removes the old Create React App service worker
-  from returning visitors' browsers.
+- `public/service-worker.js` and `public/serviceWorker.js`: remove the service
+  workers of earlier versions of the site from returning visitors' browsers.
