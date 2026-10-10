@@ -252,7 +252,8 @@ function Sheet({ section, hash = "" }) {
 
   return (
     <>
-      <title>Mardino Santosa — zdienos</title>
+      <title>Mardino Santosa — System Administrator & Full-Stack Developer</title>
+      <link rel="canonical" href="https://zdienos.com/" />
       <Hero />
       <Portrait />
       <Years />

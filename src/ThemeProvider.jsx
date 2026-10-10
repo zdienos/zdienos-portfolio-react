@@ -12,6 +12,10 @@ export function ThemeProvider({ children }) {
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
+    // Browser chrome (address bar, PWA title bar) follows the paper colour
+    document
+      .querySelector('meta[name="theme-color"]')
+      ?.setAttribute("content", theme === "dark" ? "#111111" : "#ecebe3");
     try {
       localStorage.setItem("theme", theme);
     } catch {

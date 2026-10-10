@@ -33,6 +33,7 @@ function Resume() {
   return (
     <>
       <title>Mardino Santosa — CV</title>
+      <link rel="canonical" href="https://zdienos.com/resume" />
       <section className="relative overflow-hidden border-b-2 border-ink px-4 py-12 md:px-6 md:py-16">
         <span
           aria-hidden="true"

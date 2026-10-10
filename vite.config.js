@@ -28,7 +28,7 @@ export default defineConfig({
         display: "standalone",
         orientation: "any",
         background_color: "#ecebe3",
-        theme_color: "#e5007d",
+        theme_color: "#ecebe3",
         icons: [
           {
             src: "images/icon/android-icon-192x192.png",
@@ -57,7 +57,7 @@ export default defineConfig({
       workbox: {
         globPatterns: ["**/*.{js,mjs,css,html,png,jpg,jpeg,svg,woff2}"],
         // Kill-switch for the old CRA worker; never part of the new app shell
-        globIgnores: ["service-worker.js", "serviceWorker.js"],
+        globIgnores: ["service-worker.js", "serviceWorker.js", "og-image.png"],
       },
     }),
   ],

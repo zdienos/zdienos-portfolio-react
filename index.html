@@ -3,12 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mardino Santosa</title>
+    <title>Mardino Santosa — System Administrator & Full-Stack Developer</title>
     <meta
       name="description"
-      content="Mardino Santosa (zdienos) adalah seorang system administrator, network engineer, full stack developer, electronic enthusiast, maunya sih dibilang begitu."
+      content="Mardino Santosa (zdienos) is a system administrator and full-stack developer in Makassar, Indonesia, keeping networks up and shipping web apps since 2007."
     />
+    <meta name="author" content="Mardino Santosa" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#ecebe3" />
     <script>
+      // Apply the saved or system theme before first paint (no flash)
       (function () {
         var t = null;
         try { t = localStorage.getItem("theme"); } catch (e) {}
@@ -16,75 +20,108 @@
           t = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
         }
         document.documentElement.setAttribute("data-theme", t);
+        document.querySelector('meta[name="theme-color"]').content = t === "dark" ? "#111111" : "#ecebe3";
       })();
     </script>
 
     <link rel="icon" href="/images/icon/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="32x32" href="/images/icon/favicon-32x32.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/images/icon/apple-icon-180x180.png" />
-    <meta name="theme-color" content="#e5007d" />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&display=swap"
-      rel="stylesheet"
-    />
 
     <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="zdienos" />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:url" content="https://zdienos.com/" />
-    <meta property="og:title" content="Mardino Santosa" />
+    <meta property="og:title" content="Mardino Santosa — System Administrator & Full-Stack Developer" />
     <meta
       property="og:description"
-      content="Mardino Santosa (zdienos) adalah seorang system administrator, network engineer, full stack developer, electronic enthusiast, maunya sih dibilang begitu."
+      content="Networks that stay up. Apps that ship. Sixteen years of servers, networks and web apps in Makassar, Indonesia."
     />
+    <meta property="og:image" content="https://zdienos.com/og-image.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta
-      property="og:image"
-      content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiJROCM59VDr54ibY4a9uuZ2R0Xi2OVQco2OIOqEeDIilsxN_FxB8pwFFdsC3jcFUc-eLIfiy9VoK3zwFRIMryRbtSBeKbiakMnCaGKcXTcGYfIPm7pguRzeXRNdwUsJx0n4DBURxJa3IxXaqK_DSle4K6huXAP__7FeoJrmNzKfqCDIFLujyU/s16000/og-media.jpg"
+      property="og:image:alt"
+      content="“Networks that stay up. Apps that ship.” beside a line drawing of Mardino Santosa, in cyan and magenta"
     />
 
-    <!-- Twitter -->
+    <!-- X / Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta property="twitter:domain" content="zdienos.com" />
-    <meta property="twitter:url" content="https://zdienos.com/" />
-    <meta name="twitter:title" content="Mardino Santosa" />
+    <meta name="twitter:site" content="@zdienos" />
+    <meta name="twitter:creator" content="@zdienos" />
+    <meta name="twitter:title" content="Mardino Santosa — System Administrator & Full-Stack Developer" />
     <meta
       name="twitter:description"
-      content="Mardino Santosa (zdienos) adalah seorang system administrator, network engineer, full stack developer, electronic enthusiast, maunya sih dibilang begitu."
+      content="Networks that stay up. Apps that ship. Sixteen years of servers, networks and web apps in Makassar, Indonesia."
     />
+    <meta name="twitter:image" content="https://zdienos.com/og-image.png" />
     <meta
-      name="twitter:image"
-      content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiJROCM59VDr54ibY4a9uuZ2R0Xi2OVQco2OIOqEeDIilsxN_FxB8pwFFdsC3jcFUc-eLIfiy9VoK3zwFRIMryRbtSBeKbiakMnCaGKcXTcGYfIPm7pguRzeXRNdwUsJx0n4DBURxJa3IxXaqK_DSle4K6huXAP__7FeoJrmNzKfqCDIFLujyU/s16000/og-media.jpg"
+      name="twitter:image:alt"
+      content="“Networks that stay up. Apps that ship.” beside a line drawing of Mardino Santosa, in cyan and magenta"
     />
 
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "BlogPosting",
-        "mainEntityOfPage": { "@type": "WebPage", "@id": "https://zdienos.com" },
-        "headline": "Personal Website Mardino Santosa",
-        "description": "Selamat Datang di Personal Website Mardino Santosa",
-        "image": "https://zdienos.com/images/fotoME.jpeg",
-        "author": {
+        "@type": "ProfilePage",
+        "url": "https://zdienos.com/",
+        "name": "Mardino Santosa — System Administrator & Full-Stack Developer",
+        "mainEntity": {
           "@type": "Person",
+          "@id": "https://zdienos.com/#person",
           "name": "Mardino Santosa",
-          "url": "https://www.linkedin.com/in/zdienos"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "zdienos",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://ecs7-p.tokopedia.net/img/cache/215-square/shops-1/2018/9/15/98472/98472_c0f9e91c-5d26-46a2-a20f-139145df8494.jpg"
-          }
-        },
-        "datePublished": "2019-11-11",
-        "dateModified": "2022-08-07"
+          "alternateName": "zdienos",
+          "url": "https://zdienos.com/",
+          "image": "https://zdienos.com/og-image.png",
+          "jobTitle": "System Administrator & Full-Stack Developer",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Makassar",
+            "addressCountry": "ID"
+          },
+          "alumniOf": {
+            "@type": "CollegeOrUniversity",
+            "name": "Universitas Hasanuddin"
+          },
+          "knowsAbout": [
+            "System administration",
+            "Computer networking",
+            "MikroTik",
+            "Linux",
+            "Windows Server",
+            "PHP",
+            "Laravel",
+            "CodeIgniter",
+            "JavaScript",
+            "React"
+          ],
+          "sameAs": [
+            "https://github.com/zdienos",
+            "https://www.linkedin.com/in/zdienos/",
+            "https://twitter.com/zdienos",
+            "https://www.youtube.com/zdienos",
+            "https://blog.zdienos.com/"
+          ]
+        }
       }
     </script>
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <noscript>
+      <main style="max-width: 40rem; margin: 3rem auto; padding: 0 1rem; font-family: sans-serif; line-height: 1.5">
+        <h1>Mardino Santosa</h1>
+        <p>
+          System administrator and full-stack developer in Makassar, Indonesia.
+          This site needs JavaScript; meanwhile you can read the
+          <a href="/cv-en.pdf">CV (PDF)</a>, visit the
+          <a href="https://blog.zdienos.com/">blog</a> or find me on
+          <a href="https://github.com/zdienos">GitHub</a> and
+          <a href="https://www.linkedin.com/in/zdienos/">LinkedIn</a>.
+        </p>
+      </main>
+    </noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
