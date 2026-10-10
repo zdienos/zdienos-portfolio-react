@@ -53,8 +53,9 @@ are left alone.
 
 `FTP_SERVER_DIR` depends on the FTP account: the main DirectAdmin user usually
 sees `domains/zdienos.com/public_html/`, while an account limited to the site
-folder sees `/`. Set it as a variable rather than a secret so the path stays
-readable in the run log (a secret also works, but shows as `***`). Leave `FTP_DEPLOY_LIVE` unset for the first run and check in
+folder sees `/`. An absolute path such as `/home/<user>/domains/…` also works
+if the FTP server allows it. Before uploading, every run logs in and lists the
+folder, and stops unless it already contains `index.html`. Leave `FTP_DEPLOY_LIVE` unset for the first run and check in
 the log that files would land in `public_html`.
 
 ### Run, re-run, roll back
