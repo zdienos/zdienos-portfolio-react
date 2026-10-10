@@ -2,69 +2,78 @@
 
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
+/* Newsprint and two spot inks. Inks overprint: multiply on paper, screen on black */
 :root {
-  --paper: #f4f4f1;
-  --ink: #121212;
-  --mute: #66665f;
-  --line: #d6d6cf;
-  --blue: #1d3bff;
+  --paper: #ecebe3;
+  --ink: #191919;
+  --soft: #5f5e58;
+  --cyan: #00a3e0;
+  --magenta: #e5007d;
+  --overprint: multiply;
   color-scheme: light;
 }
 
 [data-theme="dark"] {
-  --paper: #0c0d10;
-  --ink: #e9e9e4;
-  --mute: #8c8c86;
-  --line: #2a2b30;
-  --blue: #7d8cff;
+  --paper: #111111;
+  --ink: #ecebe3;
+  --soft: #9a9992;
+  --cyan: #19b8ff;
+  --magenta: #ff2f97;
+  --overprint: screen;
   color-scheme: dark;
 }
 
 @theme inline {
-  --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-sans: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
 
   --color-paper: var(--paper);
   --color-ink: var(--ink);
-  --color-mute: var(--mute);
-  --color-line: var(--line);
-  --color-blue: var(--blue);
+  --color-soft: var(--soft);
+  --color-cyan: var(--cyan);
+  --color-magenta: var(--magenta);
 }
 
 @layer base {
   html {
-    font-feature-settings: "tnum", "ss01";
+    scroll-behavior: smooth;
+    scroll-padding-top: 4rem;
   }
 
   body {
-    @apply bg-paper font-sans text-[15px] leading-[1.55] text-ink antialiased;
+    @apply bg-paper font-sans text-base leading-normal text-ink antialiased;
   }
 
   ::selection {
-    @apply bg-blue text-paper;
+    @apply bg-magenta text-paper;
   }
 
   :focus-visible {
-    @apply outline-1 outline-offset-2 outline-blue;
+    @apply outline-2 outline-offset-2 outline-magenta;
   }
 }
 
-@utility meta {
-  @apply font-mono text-xs leading-5 text-mute;
+/* Spaced capitals for labels and captions */
+@utility label {
+  @apply text-[11px] font-semibold uppercase leading-4 tracking-[0.22em] tabular-nums;
 }
 
-/* react-pdf draws a fixed-size canvas; keep it inside its column */
+@utility overprint {
+  mix-blend-mode: var(--overprint);
+}
+
 .react-pdf__Page__canvas {
   max-width: 100%;
   height: auto !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
   *,
   *::before,
   *::after {
     animation: none !important;
     transition: none !important;
-    scroll-behavior: auto !important;
   }
 }

@@ -1,8 +1,8 @@
 # zdienos — portfolio
 
-Personal site of Mardino Santosa. Swiss information-design layout: a fixed
-index panel on the left, tabular content on a twelve-column grid on the right
-(press <kbd>G</kbd> to show the grid).
+Personal site of Mardino Santosa, set as a Swiss New Wave broadsheet: one long
+page of plates in two overprinting spot inks (cyan and magenta), stepped
+type, and a portrait redrawn as a halftone screen on a canvas.
 
 ## Stack
 
@@ -28,4 +28,5 @@ Requires Node.js 22.22 or newer.
 
 - Projects are fetched from npoint (`src/data/content.js`, `PROJECTS_URL`).
 - Coding-time share comes from a public WakaTime share link.
-- Static content (roles, contacts, stack matrix) lives in `src/data/content.js`.
+- Career timeline, wins, toolbox and contacts come from the CV and live in
+  `src/data/content.js`.

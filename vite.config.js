@@ -27,8 +27,8 @@ export default defineConfig({
         start_url: "/",
         display: "standalone",
         orientation: "any",
-        background_color: "#f4f4f1",
-        theme_color: "#1d3bff",
+        background_color: "#ecebe3",
+        theme_color: "#e5007d",
         icons: [
           {
             src: "images/icon/android-icon-192x192.png",

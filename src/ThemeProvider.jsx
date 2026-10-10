@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { PreviewContext, ThemeContext } from "./contexts";
+import { ThemeContext } from "./theme";
 
 function readTheme() {
   return document.documentElement.getAttribute("data-theme") === "dark"
@@ -7,9 +7,8 @@ function readTheme() {
     : "light";
 }
 
-export function Providers({ children }) {
+export function ThemeProvider({ children }) {
   const [theme, setTheme] = useState(readTheme);
-  const [preview, setPreview] = useState(null);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
@@ -22,9 +21,5 @@ export function Providers({ children }) {
 
   const toggleTheme = () => setTheme((t) => (t === "dark" ? "light" : "dark"));
 
-  return (
-    <ThemeContext value={{ theme, toggleTheme }}>
-      <PreviewContext value={{ preview, setPreview }}>{children}</PreviewContext>
-    </ThemeContext>
-  );
+  return <ThemeContext value={{ theme, toggleTheme }}>{children}</ThemeContext>;
 }
