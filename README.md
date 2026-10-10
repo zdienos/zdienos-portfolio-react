@@ -50,11 +50,18 @@ are left alone.
 | Secret   | `FTP_PASSWORD`   | its password                                              |
 | Variable | `FTP_SERVER_DIR` | site folder as seen after FTP login, ending in `/`        |
 | Variable | `FTP_DEPLOY_LIVE`| `true` to really upload; anything else means dry run      |
+| Secret   | `CLOUDFLARE_API_TOKEN` | optional: token with *Zone → Cache Purge* permission |
+| Variable | `CLOUDFLARE_ZONE_ID`   | optional: zone ID of zdienos.com (Cloudflare overview page) |
 
-`FTP_SERVER_DIR` depends on the FTP account: the main DirectAdmin user usually
-sees `domains/zdienos.com/public_html/`, while an account limited to the site
-folder sees `/`. An absolute path such as `/home/<user>/domains/…` also works
-if the FTP server allows it. Before uploading, every run logs in and lists the
+The site sits behind Cloudflare, which caches static files at the edge. With
+the two optional Cloudflare settings, every live deploy ends by purging that
+cache; without them, purge it by hand (Caching → Purge Everything) when a
+non-hashed file such as `cv-en.pdf` changes.
+
+`FTP_SERVER_DIR` is relative to the folder the FTP account lands in. For this
+host the account lands in `domains/zdienos.com/`, so the value is
+`public_html/` (absolute `/home/...` paths are not visible over FTP here).
+Before uploading, every run logs in and lists the
 folder, and stops unless it already contains `index.html`. Leave `FTP_DEPLOY_LIVE` unset for the first run and check in
 the log that files would land in `public_html`.
 

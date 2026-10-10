@@ -22,6 +22,12 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    env:
+      # A real upload happens only when FTP_DEPLOY_LIVE is "true" and the
+      # manual "dry run" box is not ticked
+      LIVE: ${{ vars.FTP_DEPLOY_LIVE == 'true' && inputs.dry_run != true }}
+      # Optional: purge Cloudflare after a live deploy when these are set
+      HAS_CLOUDFLARE: ${{ secrets.CLOUDFLARE_API_TOKEN != '' && vars.CLOUDFLARE_ZONE_ID != '' }}
     steps:
       - uses: actions/checkout@v7
 
@@ -110,5 +116,24 @@ jobs:
           port: 21
           local-dir: ./dist/
           server-dir: ${{ steps.settings.outputs.dir }}
-          dry-run: ${{ vars.FTP_DEPLOY_LIVE != 'true' || inputs.dry_run == true }}
+          dry-run: ${{ env.LIVE != 'true' }}
           log-level: standard
+
+      # Cloudflare caches static files (.js, .png, .pdf) at the edge; clear it so
+      # non-hashed files such as cv-en.pdf and the service workers update at once
+      - name: Purge Cloudflare cache
+        if: env.LIVE == 'true' && env.HAS_CLOUDFLARE == 'true'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          ZONE_ID: ${{ vars.CLOUDFLARE_ZONE_ID }}
+        run: |
+          response=$(curl -sS -X POST \
+            "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/purge_cache" \
+            -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+            -H "Content-Type: application/json" \
+            --data '{"purge_everything":true}')
+          if echo "$response" | grep -q '"success":true'; then
+            echo "Cloudflare cache purged"
+          else
+            echo "::warning::Cloudflare purge failed: $response"
+          fi
