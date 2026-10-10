@@ -13,6 +13,9 @@ Options -MultiViews
   RewriteCond %{HTTP:X-Forwarded-Proto} !https
   RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
+  # The deploy tool's bookkeeping file lists every file and hash; keep it private
+  RewriteRule ^\.ftp-deploy-sync-state\.json$ - [F,L]
+
   # Real files and folders are served as they are
   RewriteCond %{REQUEST_FILENAME} -f [OR]
   RewriteCond %{REQUEST_FILENAME} -d
