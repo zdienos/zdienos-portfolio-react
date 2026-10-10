@@ -1,9 +1,11 @@
 import React from "react";
-// function Pre(props) {
-//   return <div id={props.load ? "preloader" : "preloader-none"}></div>;
-// }
+
 function Pre() {
-  return <div id={"preloader"}></div>;
+  return (
+    <div id="preloader" role="status" aria-label="Loading">
+      <span className="s-loader" />
+    </div>
+  );
 }
 
 export default Pre;

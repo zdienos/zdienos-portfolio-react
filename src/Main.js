@@ -1,10 +1,8 @@
-import React, { useState, useEffect, lazy, Suspense } from "react";
+import React, { lazy, Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Preloader from "../src/components/Pre";
 
 import "./main.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import DarkModeToggle from "./components/DarkModeToggle";
 // import { BsFillMoonFill, BsFillSunFill } from "react-icons/bs";
 
 
@@ -27,33 +25,22 @@ const ScrollToTop  = lazy(() => import("./components/ScrollToTop"));
 
 
 function Main() {  
-  const [load, upadateLoad] = useState(true);  
-  
-  
-  useEffect(() => {    
-    const timer = setTimeout(() => {
-      upadateLoad(false);
-    }, 1200);
-    
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
     <Router>      
-      {/* <Preloader load={load} /> */}
-      <div className="App" id={load ? "no-scroll" : "scroll"}> 
+      <div className="App" id="top"> 
                       
-      <DarkModeToggle/>
 
       <Suspense fallback={<Preloader />}> <Navbar /> </Suspense>
       <Suspense fallback={<Preloader />}>   <ScrollToTop /> </Suspense>
       <Suspense fallback={<Preloader />}>  
+        <main className="s-main">
         <Routes>
           <Route path="/" exact element={<Home />} /> 
           <Route path="/project" element={<Projects />} /> 
           <Route path="/about" element={<About/>} /> 
           <Route path="/resume" element={<Resume/>} /> 
         </Routes>
+        </main>
         </Suspense>
         <Suspense fallback={<Preloader />}> <Footer /> </Suspense>
                       

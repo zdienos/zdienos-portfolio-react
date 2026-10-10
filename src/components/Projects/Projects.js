@@ -1,79 +1,84 @@
-import React, { useState } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Tab from "react-bootstrap/Tab";
-import Tabs from "react-bootstrap/Tabs";
 import ProjectCard from "./ProjectCards";
-// import Preloader from "../Pre";
 
 const npointURL = "https://api.npoint.io/b5c3511ff95746384e06";
 
 function Projects() {
   const [projects, setData] = useState([]);
   const [isLoading, setLoading] = useState(true);
-  const headers = {
-    'Access-Control-Allow-Origin': '*'    
-  }
+  const [activeKey, setActiveKey] = useState("webapp");
 
-  const getData = async () => {
-    const result = await axios(npointURL, {
-      headers: headers
-    });
-    setData(result.data);
-    setLoading(false);
-  };
+  useEffect(() => {
+    let active = true;
+    axios(npointURL)
+      .then((result) => {
+        if (active) setData(result.data.projects || []);
+      })
+      .catch((ex) => console.log("fetch projects failed", ex))
+      .finally(() => active && setLoading(false));
+    return () => {
+      active = false;
+    };
+  }, []);
 
-  // useEffect(() => {
-    getData();
-  // }, [])
-
+  const current = projects.find(({ key }) => key === activeKey) || projects[0];
 
   return (
-    <Container fluid className="project-section">
-      <Container>
-        <h2 className="project-heading">
-          My Recent <strong>Works </strong>
-        </h2>
-        <p>Here are a few projects I've been worked on.</p>
-        {isLoading && <div id={"spin-loader"} />}
-        <Tabs
-          defaultActiveKey="webapp"
-          id="uncontrolled-tab-example"
-          style={{ justifyContent: "center", paddingTop: "20px" }}
-          variant="pills"
-        >
-          {projects.projects &&
-            projects.projects.map(({ key, title, data }) => (
-              <Tab key={key} eventKey={key} title={title}>
-                <Row
-                  style={{ justifyContent: "center", paddingBottom: "10px" }}
-                >
-                  {data &&
-                    data.map(
-                      ({ id, imgpath, isblog, title, description, link }) => (
-                        <Col
-                          xs={12}
-                          md={6}
-                          lg={4}
-                          className="project-card"
-                          key={id}
-                        >
-                          <ProjectCard
-                            imgPath={imgpath}
-                            isBlog={isblog}
-                            title={title}
-                            description={description}
-                            link={link}
-                          />
-                        </Col>
-                      )
-                    )}
-                </Row>
-              </Tab>
+    <>
+      <section className="s-page-head">
+        <div className="s-container s-grid">
+          <span className="s-meta s-page-head__meta">Selected work</span>
+          <h1 className="s-display s-display--md">
+            Recent works<span className="s-accent">.</span>
+          </h1>
+          <p className="s-page-head__lead">
+            Here are a few projects I've worked on.
+          </p>
+        </div>
+      </section>
+
+      <section className="s-section">
+        <div className="s-container">
+          <div className="s-tabs" role="tablist" aria-label="Project categories">
+            {projects.map(({ key, title, data }) => (
+              <button
+                key={key}
+                type="button"
+                role="tab"
+                aria-selected={current && current.key === key}
+                className={`s-tab${current && current.key === key ? " is-active" : ""}`}
+                onClick={() => setActiveKey(key)}
+              >
+                {title}
+                <sup>{data ? data.length : 0}</sup>
+              </button>
             ))}
-        </Tabs>
-      </Container>
-    </Container>
+          </div>
+
+          {isLoading && <p className="s-meta">Loading projects…</p>}
+
+          {current && current.data && (
+            <ul className="s-works" role="tabpanel">
+              {current.data.map(
+                ({ id, imgpath, isblog, title, description, link }, i) => (
+                  <li key={id}>
+                    <ProjectCard
+                      index={i + 1}
+                      imgPath={imgpath}
+                      isBlog={isblog}
+                      title={title}
+                      description={description}
+                      link={link}
+                    />
+                  </li>
+                )
+              )}
+            </ul>
+          )}
+        </div>
+      </section>
+    </>
   );
 }
 

@@ -1,122 +1,56 @@
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
 import myImg from "../../Assets/fotoME-min.jpg";
-import Tilt from "react-parallax-tilt";
-import {
-  AiFillGithub,  
-  AiOutlineTwitter,  
-} from "react-icons/ai";
-import { FaLinkedinIn, FaTelegram, FaWhatsapp, FaYoutube } from "react-icons/fa";
+import Section from "../Section";
+
+const socials = [
+  { name: "GitHub", handle: "zdienos", href: "https://github.com/zdienos" },
+  { name: "X / Twitter", handle: "@zdienos", href: "https://twitter.com/zdienos" },
+  { name: "LinkedIn", handle: "in/zdienos", href: "https://www.linkedin.com/in/zdienos/" },
+  { name: "YouTube", handle: "/zdienos", href: "https://www.youtube.com/zdienos/" },
+  { name: "WhatsApp", handle: "+62 852 9997 7945", href: "https://wa.me/+6285299977945/" },
+  { name: "Telegram", handle: "t.me/zdienos", href: "https://t.me/zdienos" },
+];
 
 function HomeSecond() {
   return (
-    <Container fluid className="home-about-section" id="about">
-      <Container>
-        <Row>
-          <Col md={8} className="home-about-description">
-            <h2 style={{ fontSize: "1.6em" }}>
-              LET ME <span className="purple"> INTRODUCE </span> MYSELF
-            </h2>
-            <p className="home-about-body">
-            A hard-working <b>IT Administrator</b>, skilled at managing networking, maintaining security systems and databases. Effective communicator with great technological expertise and deep passion for
-            technology.
-            <br />
-            <br />
-            Also a <b>Full Stack Developer</b> with 5+ years of hands-on experience in developing scalable website/
-            applications using a wide range of front/back-end skills like HTML/ CSS/ JavaScript/ JQuery and PHP/ CodeIgniter/ Laravel, I think… 🤷‍♂️            
+    <>
+      <Section num="01" label="Introduction">
+        <div className="s-split">
+          <div>
+            <p className="s-lead">
+              A hard-working <strong>IT Administrator</strong>, skilled at
+              managing networking, maintaining security systems and databases.
             </p>
-          </Col>
-          <Col md={4} className="myAvatar">
-            <Tilt>
-              <img src={myImg} className="img-avatar" alt="avatar" />
-            </Tilt>
-          </Col>
-        </Row>
-        <hr />
-        <Row>
-          <Col md={12} className="home-about-social">
-          <h2 style={{ fontSize: "1.6em" }}>FIND ME ON</h2>
-            <p>
-              Feel free to <span className="purple">connect </span>with me
+            <p className="s-body">
+              Effective communicator with great technological expertise and deep
+              passion for technology. Also a <strong>Full Stack Developer</strong>{" "}
+              with 5+ years of hands-on experience in developing scalable
+              websites and applications using a wide range of front/back-end
+              skills like HTML, CSS, JavaScript, jQuery and PHP, CodeIgniter,
+              Laravel — I think… 🤷‍♂️
             </p>
-            <ul className="home-about-social-links">             
-              <li className="social-icons">
-                <a
-                  href="https://github.com/zdienos"
-                  alt="Github"
-                  aria-label="Check my Github"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="icon-colour home-social-icons"
-                >
-                  <AiFillGithub />
-                </a>
-              </li>
-              <li className="social-icons">
-                <a
-                  href="https://twitter.com/zdienos"
-                  aria-label="Tweet my X"
-                  alt="Twitter"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="icon-colour home-social-icons"
-                >
-                  <AiOutlineTwitter />
-                </a>
-              </li>
-              <li className="social-icons">
-                <a
-                  href="https://www.linkedin.com/in/zdienos/"
-                  aria-label="Find me on Linkedin"
-                  alt="Linkedin"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="icon-colour home-social-icons"
-                >
-                  <FaLinkedinIn />
-                </a>
-              </li>
-              <li className="social-icons">
-                <a
-                  href="https://www.youtube.com/zdienos/"
-                  aria-label="Watch my Videos"
-                  alt="Youtube"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="icon-colour home-social-icons"
-                >
-                  <FaYoutube />
-                </a>
-              </li>
-              <li className="social-icons">
-                <a
-                  href="https://wa.me/+6285299977945/"
-                  aria-label="WA me"
-                  alt="Whatsapp"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="icon-colour home-social-icons"
-                >
-                  <FaWhatsapp />
-                </a>
-              </li>
-              <li className="social-icons">
-                <a
-                  href="https://t.me/zdienos"
-                  aria-label="Contact me on Telegram"
-                  alt="Telegram"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="icon-colour home-social-icons"
-                >
-                  <FaTelegram />
-                </a>
-              </li>              
-            </ul>
-          </Col>
-        </Row>
-      </Container>
-    </Container>
+          </div>
+          <figure className="s-portrait">
+            <img src={myImg} alt="Mardino Santosa" />
+            <figcaption className="s-meta">Fig. 1 — Mardino Santosa</figcaption>
+          </figure>
+        </div>
+      </Section>
+
+      <Section num="02" label="Find me on" title="Feel free to connect.">
+        <ul className="s-index">
+          {socials.map(({ name, handle, href }) => (
+            <li key={name}>
+              <a href={href} target="_blank" rel="noreferrer">
+                <span className="s-index__name">{name}</span>
+                <span className="s-index__meta">{handle}</span>
+                <span className="s-index__arrow" aria-hidden="true">↗</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </Section>
+    </>
   );
 }
 export default HomeSecond;

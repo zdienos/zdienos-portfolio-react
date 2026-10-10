@@ -1,23 +1,30 @@
 import React from "react";
-import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
-import { BiLinkExternal } from "react-icons/bi";
 
 function ProjectCards(props) {
+  const hasLink = props.link && props.link !== "#";
   return (
-    <Card className="project-card-view">
-      <Card.Img variant="top" src={props.imgPath} alt="card-img" />
-      <Card.Body>
-        <Card.Title>{props.title}</Card.Title>
-        <Card.Text style={{ textAlign: "justify" }}>
-          {props.description}
-        </Card.Text>
-        <Button variant="primary" href={props.link} target="_blank">
-          <BiLinkExternal /> &nbsp;
-          {props.isBlog ? "View Blog" : "View Project"}
-        </Button>
-      </Card.Body>
-    </Card>
+    <article className="s-work">
+      <div className="s-work__img">
+        <img src={props.imgPath} alt={props.title} loading="lazy" />
+      </div>
+      <div className="s-work__head">
+        <span className="s-num">{String(props.index).padStart(2, "0")}</span>
+        <h3 className="s-work__title">{props.title}</h3>
+      </div>
+      <p className="s-work__desc">{props.description}</p>
+      {hasLink ? (
+        <a
+          className="s-link"
+          href={props.link}
+          target="_blank"
+          rel="noreferrer"
+        >
+          {props.isBlog ? "View blog" : "View project"} ↗
+        </a>
+      ) : (
+        <span className="s-meta">Private project</span>
+      )}
+    </article>
   );
 }
 export default ProjectCards;

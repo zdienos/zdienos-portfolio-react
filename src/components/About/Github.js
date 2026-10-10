@@ -1,35 +1,37 @@
 import React from "react";
 import GitHubCalendar from "react-github-calendar";
-import { Row } from "react-bootstrap";
+
+const selectLastHalfYear = (contributions) => {
+  const shownMonths = 6;
+  const since = new Date();
+  since.setMonth(since.getMonth() - shownMonths);
+  return contributions.filter((day) => new Date(day.date) >= since);
+};
+
+// Colors resolve from CSS variables so the calendar follows light/dark mode
+const theme = {
+  level0: "var(--cal-0)",
+  level1: "var(--cal-1)",
+  level2: "var(--cal-2)",
+  level3: "var(--cal-3)",
+  level4: "var(--cal-4)",
+};
 
 function Github() {
-  // const colourTheme = {
-    // background: "transparent",
-    // text: "#274c77",
-  //   grade4: "#DEB6AB",
-  //   grade3: "#ECCCB2",
-  //   grade2: "#ECCCB2",
-  //   grade1: "#F5E8C7",
-  //   grade0: "#F2D7D9",
-  // };
   return (
-    <Row style={{ justifyContent: "center", paddingBottom: "20px" }}>
-      <h2 className="project-heading" style={{ paddingBottom: "10px" }}>
-        Days <strong className="purple"> I Code</strong>
-      </h2>
-      <GitHubCalendar style={{ fill:"black" }}
+    <div className="s-calendar">
+      <GitHubCalendar
         username="zdienos"
-        blockSize={15}
-        blockMargin={5}
-        // theme={colourTheme}
-        color={"#80558C"}
-        fontSize={16}
-        showWeekdayLabels="true"
-        transformData={"selectLastHalfYear"} 
-        hideTotalCount="false" 
-        hideColorLegend="false"
+        blockSize={13}
+        blockMargin={4}
+        blockRadius={0}
+        theme={theme}
+        fontSize={13}
+        showWeekdayLabels
+        transformData={selectLastHalfYear}
+        hideColorLegend
       />
-    </Row>
+    </div>
   );
 }
 

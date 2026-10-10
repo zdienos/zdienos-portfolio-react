@@ -1,28 +1,44 @@
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
 import HomeSecond from "./HomeSecond";
-import Type from "./Type";
+
+const roles = [
+  "Full 'Snack' Developer",
+  "Network / System Administrator",
+  "Open Source Contributor??",
+];
 
 function Home() {
   return (
-    <section>
-      <Container fluid className="home-section" id="home">        
-        <Container className="home-content">
-          <Row>
-            <Col md={12} className="home-header">
-              <h1 className="heading-name">
-                I am
-                <strong className="main-name"> Mardino Santosa</strong>
-              </h1>
-              <div style={{ height:130, padding: 10, textAlign: "center" }}>
-                <Type />
-              </div>
-            </Col>
-          </Row>
-        </Container>
-      </Container>
+    <>
+      <section className="s-hero" id="home">
+        <div className="s-container s-grid">
+          <div className="s-hero__meta">
+            <span className="s-meta">Portfolio</span>
+            <span>Makassar, Indonesia</span>
+          </div>
+          <div className="s-hero__meta">
+            <span className="s-meta">Discipline</span>
+            <span>IT Administration &amp; Web Development</span>
+          </div>
+
+          <h1 className="s-display">
+            Mardino
+            <br />
+            Santosa<span className="s-accent">.</span>
+          </h1>
+
+          <ol className="s-roles">
+            {roles.map((role, i) => (
+              <li key={role}>
+                <span className="s-num">0{i + 1}</span>
+                {role}
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
       <HomeSecond />
-    </section>
+    </>
   );
 }
 

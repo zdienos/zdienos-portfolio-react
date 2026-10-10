@@ -1,54 +1,43 @@
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
 import Github from "./Github";
 import Techstack from "./Techstack";
 import Aboutcard from "./AboutCard";
-import laptopImg from "../../Assets/about.png";
 import Toolstack from "./Toolstack";
 import Wakatime from "./Wakatime";
+import Section from "../Section";
 
 function About() {
   return (
-    <Container fluid className="about-section">      
-      <Container>
-        <Row style={{ justifyContent: "center", padding: "10px" }}>
-          <Col
-            md={7}
-            style={{
-              justifyContent: "center",
-              paddingTop: "30px",
-              paddingBottom: "50px",
-            }}
-          >
-            <h1 style={{ fontSize: "2.1em", paddingBottom: "20px" }}>
-               Who <strong className="purple"> am I?</strong>
-            </h1>
-            <Aboutcard />
-          </Col>
-          <Col
-            md={5}
-            style={{ paddingTop: "120px", paddingBottom: "20px" }}
-            className="about-img"
-          >
-            <img src={laptopImg} alt="about" className="img-fluid" />
-          </Col>
-        </Row>
-        <h2 className="project-heading">
-          Stacks <strong className="purple"> I Know</strong>
-        </h2>
+    <>
+      <section className="s-page-head">
+        <div className="s-container s-grid">
+          <span className="s-meta s-page-head__meta">About</span>
+          <h1 className="s-display s-display--md">
+            Who am I<span className="s-accent">?</span>
+          </h1>
+        </div>
+      </section>
 
+      <Section num="01" label="Profile">
+        <Aboutcard />
+      </Section>
+
+      <Section num="02" label="Stack" title="Stacks I know.">
         <Techstack />
+      </Section>
 
-        <h1 className="project-heading">
-          Tools <strong className="purple">I Use</strong>
-        </h1>
+      <Section num="03" label="Tools" title="Tools I use.">
         <Toolstack />
+      </Section>
 
+      <Section num="04" label="Activity" title="Days I code.">
         <Github />
+      </Section>
 
+      <Section num="05" label="Languages" title="Languages I use.">
         <Wakatime />
-      </Container>
-    </Container>
+      </Section>
+    </>
   );
 }
 

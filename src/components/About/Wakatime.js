@@ -1,8 +1,4 @@
-import React, { useRef, useLayoutEffect } from "react";
-import { Row } from "react-bootstrap";
-import * as am4core from "@amcharts/amcharts4/core";
-import * as am4charts from "@amcharts/amcharts4/charts";
-import am4themes_animated from "@amcharts/amcharts4/themes/animated";
+import React, { useState, useEffect } from "react";
 import fetchJsonp from "fetch-jsonp";
 
 // const WakaChartURL =  "https://wakatime.com/share/@zdienos/87859afd-b87c-4e94-899e-a42ffe0f7b72.json"; //last year
@@ -10,97 +6,62 @@ import fetchJsonp from "fetch-jsonp";
 // const WakaChartURL = 'https://wakatime.com/share/@zdienos/ba313035-ceeb-48b6-91fc-784abe4c4329.json'; //all the time
 const WakaChartURL =  "https://wakatime.com/share/@zdienos/618218b9-cc3f-4100-bcf5-5f1e6c0a76d6.json"; //last 7 days
 
-am4core.useTheme(am4themes_animated);
-am4core.options.autoDispose = true;
+const MAX_ROWS = 10;
 
 function Wakatime() {
-  const chart = useRef(null);
+  const [languages, setLanguages] = useState([]);
+  const [status, setStatus] = useState("loading");
 
-  // function createChart(chartData) {
-  const createChart = (chartData) => {
-    let x = am4core.create("chartdiv", am4charts.XYChart);
-
-    x.paddingRight = 20;
-
-    x.cursor = new am4charts.XYCursor();
-    x.scrollbarX = new am4core.Scrollbar();
-    x.scrollbarY = new am4core.Scrollbar();
-
-    let categoryAxis = x.yAxes.push(new am4charts.CategoryAxis());
-    categoryAxis.renderer.grid.template.location = 0;
-    categoryAxis.dataFields.category = "name";
-    categoryAxis.renderer.minGridDistance = 1;
-    categoryAxis.renderer.inversed = true;
-    categoryAxis.renderer.grid.template.disabled = true;
-    categoryAxis.title.text = "Languages over last 7 days";
-    //categoryAxis.title.text.fill="#dedede";
-
-    let valueAxis = x.xAxes.push(new am4charts.ValueAxis());
-    valueAxis.min = 0;
-
-    let series = x.series.push(new am4charts.ColumnSeries());
-    series.dataFields.categoryY = "name";
-    series.dataFields.valueX = "percent";
-    series.tooltipText = "{valueX.value}%";
-    series.columns.template.strokeOpacity = 0;
-    series.columns.template.column.cornerRadiusBottomRight = 5;
-    series.columns.template.column.cornerRadiusTopRight = 5;
-
-    // series.columns.template.adapter.add("fill", function (fill, target) {
-    //   return target.dataItem.dataContext.color;
-    // });
-    // series.columns.template.adapter.add("stroke", function (fill, target) {
-    //   return target.dataItem.dataContext.color;
-    // });
-
-    // untuk label di setiap seriesnya
-    // let labelBullet = series.bullets.push(new am4charts.LabelBullet());
-    // labelBullet.label.horizontalCenter = "center";
-    // labelBullet.label.dx = 10;
-    // labelBullet.label.text =
-    //   "{values.valueX.workingValue.formatNumber('#.0as')}";
-    // labelBullet.locationX = 1;
-
-    // defaulnya untuk column dengan seriers yang sama, warnanya sama, tambahkan adapter untuk mengambil warna dari chart.colors set
-    series.columns.template.adapter.add("fill", function (fill, target) {
-      return x.colors.getIndex(target.dataItem.index);
-    });
-
-    categoryAxis.sortBySeries = series;
-    x.data = chartData;
-
-    chart.current = x;
-    
-  };
-
-  useLayoutEffect(() => {
-    async function fetchData() {
-      await fetchJsonp(WakaChartURL)
-        .then(function (response) {
-          return response.json();
-        })
-        .then(function (response) {
-          createChart(response.data);
-        })
-        .catch(function (ex) {
-          console.log("parsing failed", ex);
-        });
-    }
-    
-    fetchData();
-
+  useEffect(() => {
+    let active = true;
+    fetchJsonp(WakaChartURL)
+      .then((response) => response.json())
+      .then((response) => {
+        if (!active) return;
+        const sorted = [...response.data]
+          .sort((a, b) => b.percent - a.percent)
+          .slice(0, MAX_ROWS);
+        setLanguages(sorted);
+        setStatus("ready");
+      })
+      .catch((ex) => {
+        console.log("parsing failed", ex);
+        if (active) setStatus("error");
+      });
     return () => {
-      chart.current && chart.current.dispose();
+      active = false;
     };
   }, []);
 
+  if (status === "loading") return <p className="s-meta">Loading data…</p>;
+  if (status === "error")
+    return <p className="s-meta">Could not load WakaTime data.</p>;
+
+  if (languages.length === 0)
+    return <p className="s-meta">No coding activity recorded in the last 7 days.</p>;
+
+  const max = languages[0] ? languages[0].percent : 100;
+
   return (
-    <Row style={{ justifyContent: "center", paddingBottom: "20px" }}>
-      <h2 className="project-heading" style={{ paddingBottom: "10px" }}>
-        Languages<strong className="purple"> I Use</strong>
-      </h2>
-      <div id="chartdiv" style={{ width: "100%", height: "500px" }}></div>
-    </Row>
+    <figure className="s-bars">
+      <ol>
+        {languages.map(({ name, percent }, i) => (
+          <li key={name} className={i === 0 ? "is-top" : undefined}>
+            <span className="s-bars__name">{name}</span>
+            <span className="s-bars__track">
+              <span
+                className="s-bars__fill"
+                style={{ width: `${(percent / max) * 100}%` }}
+              />
+            </span>
+            <span className="s-bars__value">{percent.toFixed(1)}%</span>
+          </li>
+        ))}
+      </ol>
+      <figcaption className="s-meta">
+        Share of coding time over the last 7 days — WakaTime
+      </figcaption>
+    </figure>
   );
 }
 export default Wakatime;

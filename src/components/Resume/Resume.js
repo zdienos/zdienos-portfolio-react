@@ -1,13 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import Button from "react-bootstrap/Button";
-
-import {
-  AiOutlineDownload,
-  AiFillCaretLeft,
-  AiFillCaretRight,
-} from "react-icons/ai";
-
 import { Document, Page, pdfjs } from "react-pdf";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 
@@ -19,81 +10,74 @@ function Resume() {
   const [width, setWidth] = useState(1200);
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
-  const [showButton, setShowButton] = useState(false);
 
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages);
     setPageNumber(1);
-    setShowButton(true);
   }
 
   function changePage(offset) {
     setPageNumber((prevPageNumber) => prevPageNumber + offset);
   }
 
-  function previousPage() {
-    changePage(-1);
-  }
-
-  function nextPage() {
-    changePage(1);
-  }
-
   useEffect(() => {
     setWidth(window.innerWidth);
-    setShowButton(false);
   }, []);
 
   return (
-    <div>
-      <Container fluid className="resume-section">   
-        <Row>
-        {!onDocumentLoadSuccess && <div id={"spin-loader"}/>}
-        </Row>           
-        <Row className="resume">
-          <Document
-            file={resumeLink}
-            onLoadSuccess={onDocumentLoadSuccess}
-            onClick={changePage}
-          >
-            <Page pageNumber={pageNumber} 
-            scale={width > 786 ? 1.3 : 0.6} 
-            />
-          </Document>
-        </Row>
-        <Row
-          style={{ justifyContent: "center", position: "relative", top: -170 }}
-        >
-          <div style={{ display: showButton ? "block" : "none" }}>
-            <Button
-              variant="primary"
-              type="button"
-              disabled={pageNumber <= 1}
-              onClick={previousPage}
-            >
-              <AiFillCaretLeft />
-            </Button>
-            &nbsp;
-            <Button
-              variant="primary"
-              type="button"
-              disabled={pageNumber >= numPages}
-              onClick={nextPage}
-            >
-              <AiFillCaretRight />
-            </Button>
+    <>
+      <section className="s-page-head">
+        <div className="s-container s-grid">
+          <span className="s-meta s-page-head__meta">Curriculum vitae</span>
+          <h1 className="s-display s-display--md">
+            Resume<span className="s-accent">.</span>
+          </h1>
+          <div className="s-page-head__lead">
+            <a className="s-button" href={resumeLink} target="_blank" rel="noreferrer">
+              Download CV ↓
+            </a>
           </div>
-        </Row>
-        <Row style={{ justifyContent: "center", position: "relative" }}>
-          <Col className="md-5">
-          <Button variant="primary" href={resumeLink} target="_blank">
-            <AiOutlineDownload />
-            &nbsp;Download CV
-          </Button>
-          </Col>
-        </Row>
-      </Container>
-    </div>
+        </div>
+      </section>
+
+      <section className="s-section">
+        <div className="s-container">
+          <div className="s-resume">
+            <Document
+              file={resumeLink}
+              onLoadSuccess={onDocumentLoadSuccess}
+              loading={<p className="s-meta">Loading PDF…</p>}
+            >
+              <Page pageNumber={pageNumber} scale={width > 786 ? 1.3 : 0.6} />
+            </Document>
+          </div>
+
+          {numPages && (
+            <div className="s-pager">
+              <button
+                type="button"
+                className="s-button s-button--ghost"
+                disabled={pageNumber <= 1}
+                onClick={() => changePage(-1)}
+              >
+                ← Prev
+              </button>
+              <span className="s-meta">
+                Page {String(pageNumber).padStart(2, "0")} / {String(numPages).padStart(2, "0")}
+              </span>
+              <button
+                type="button"
+                className="s-button s-button--ghost"
+                disabled={pageNumber >= numPages}
+                onClick={() => changePage(1)}
+              >
+                Next →
+              </button>
+            </div>
+          )}
+        </div>
+      </section>
+    </>
   );
 }
 
