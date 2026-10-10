@@ -27,7 +27,7 @@ jobs:
       # manual "dry run" box is not ticked
       LIVE: ${{ vars.FTP_DEPLOY_LIVE == 'true' && inputs.dry_run != true }}
       # Optional: purge Cloudflare after a live deploy when these are set
-      HAS_CLOUDFLARE: ${{ secrets.CLOUDFLARE_API_TOKEN != '' && vars.CLOUDFLARE_ZONE_ID != '' }}
+      HAS_CLOUDFLARE: ${{ secrets.CLOUDFLARE_API_TOKEN != '' && (vars.CLOUDFLARE_ZONE_ID != '' || secrets.CLOUDFLARE_ZONE_ID != '') }}
     steps:
       - uses: actions/checkout@v7
 
@@ -125,7 +125,7 @@ jobs:
         if: env.LIVE == 'true' && env.HAS_CLOUDFLARE == 'true'
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          ZONE_ID: ${{ vars.CLOUDFLARE_ZONE_ID }}
+          ZONE_ID: ${{ vars.CLOUDFLARE_ZONE_ID || secrets.CLOUDFLARE_ZONE_ID }}
         run: |
           response=$(curl -sS -X POST \
             "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/purge_cache" \

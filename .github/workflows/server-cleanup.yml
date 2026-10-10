@@ -1,0 +1,108 @@
+name: Server cleanup (manual)
+
+# Lists everything in public_html; optionally deletes the listed leftovers.
+# Files the deploy owns (see .ftp-deploy-sync-state.json) can never be deleted here.
+on:
+  workflow_dispatch:
+    inputs:
+      paths:
+        description: "Paths inside public_html to delete, one per line (leave empty to only list)"
+        type: string
+        default: ""
+      confirm:
+        description: "Really delete the paths above"
+        type: boolean
+        default: false
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      FTP_SERVER: ${{ secrets.FTP_SERVER }}
+      FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+      FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+      DIR: ${{ vars.FTP_SERVER_DIR }}
+      PATHS: ${{ inputs.paths }}
+      CONFIRM: ${{ inputs.confirm }}
+    steps:
+      - name: Install lftp
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp > /dev/null
+
+      - name: Inventory and clean up
+        run: |
+          set -euo pipefail
+          dir="${DIR%/}/"
+          [ -n "$DIR" ] || { echo "::error::FTP_SERVER_DIR is not set"; exit 1; }
+
+          ftp() {
+            lftp -u "$FTP_USERNAME,$FTP_PASSWORD" \
+              -e "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ssl:verify-certificate no; set net:max-retries 2; set net:timeout 30; $1; bye" \
+              "$FTP_SERVER"
+          }
+
+          echo "::group::Everything in $dir"
+          ftp "cd '$dir'; find" | sed 's|^\./||' | sort | tee inventory.txt
+          echo "::endgroup::"
+          echo "$(grep -vc '/$' inventory.txt || true) files, $(grep -c '/$' inventory.txt || true) folders"
+
+          # Files placed by the deploy workflow are off limits
+          ftp "cd '$dir'; get -O . .ftp-deploy-sync-state.json" > /dev/null 2>&1 || true
+          if [ -f .ftp-deploy-sync-state.json ]; then
+            jq -r '.data[].name' .ftp-deploy-sync-state.json | sort > owned.txt
+          else
+            : > owned.txt
+          fi
+          echo "Owned by the deploy: $(wc -l < owned.txt) entries"
+
+          if [ -z "${PATHS//[[:space:]]/}" ]; then
+            echo "No paths given: listing only."
+            exit 0
+          fi
+
+          : > todo.txt
+          refused=0
+          while IFS= read -r raw; do
+            p="$(echo "$raw" | sed 's/^[[:space:]]*//; s/[[:space:]]*$//; s|^\./||; s|/$||')"
+            [ -n "$p" ] || continue
+            reason=""
+            case "$p" in
+              *..* | /* ) reason="not a plain path inside $dir" ;;
+              .htaccess | .ftp-deploy-sync-state.json | index.html | assets | assets/* | cgi-bin | cgi-bin/* | *.shtml ) reason="protected" ;;
+            esac
+            if [ -z "$reason" ] && grep -qxF "$p" owned.txt; then reason="deployed by the site"; fi
+            if [ -z "$reason" ] && grep -q "^$p/" owned.txt; then reason="folder holds deployed files"; fi
+            if [ -z "$reason" ] && ! grep -qxF "$p" inventory.txt && ! grep -qxF "$p/" inventory.txt; then reason="not found"; fi
+            if [ -n "$reason" ]; then
+              echo "::warning::Skip $p ($reason)"; refused=$((refused + 1))
+            else
+              echo "$p" >> todo.txt
+            fi
+          done <<< "$PATHS"
+
+          echo "::group::Would delete"
+          cat todo.txt
+          echo "::endgroup::"
+
+          if [ "$CONFIRM" != "true" ]; then
+            echo "Dry run: tick 'confirm' to delete the $(wc -l < todo.txt) paths above."
+            exit 0
+          fi
+
+          cmds="cd '$dir'"
+          while IFS= read -r p; do
+            if grep -qxF "$p/" inventory.txt; then cmds="$cmds; rm -r '$p'"; else cmds="$cmds; rm '$p'"; fi
+          done < todo.txt
+          ftp "$cmds"
+          echo "Deleted $(wc -l < todo.txt) paths ($refused skipped)."
+
+          echo "::group::What is left in $dir"
+          ftp "cd '$dir'; find" | sed 's|^\./||' | sort
+          echo "::endgroup::"

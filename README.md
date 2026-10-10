@@ -51,7 +51,7 @@ are left alone.
 | Variable | `FTP_SERVER_DIR` | site folder as seen after FTP login, ending in `/`        |
 | Variable | `FTP_DEPLOY_LIVE`| `true` to really upload; anything else means dry run      |
 | Secret   | `CLOUDFLARE_API_TOKEN` | optional: token with *Zone → Cache Purge* permission |
-| Variable | `CLOUDFLARE_ZONE_ID`   | optional: zone ID of zdienos.com (Cloudflare overview page) |
+| Variable | `CLOUDFLARE_ZONE_ID`   | optional: zone ID of zdienos.com (a secret works too) |
 
 The site sits behind Cloudflare, which caches static files at the edge. With
 the two optional Cloudflare settings, every live deploy ends by purging that
@@ -71,6 +71,13 @@ the log that files would land in `public_html`.
   "dry run" to only preview).
 - Roll back: `git revert` the bad commit on `main` and push; the previous
   version is deployed again.
+
+### Cleaning up the server
+
+Actions → "Server cleanup (manual)" lists everything in `public_html`. To
+remove leftovers, paste their paths (one per line) and tick *confirm*. Files
+the deploy owns, `.htaccess`, `cgi-bin` and the `*.shtml` error pages are
+always skipped.
 
 ### Server files that come from this repo
 
