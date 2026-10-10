@@ -62,14 +62,14 @@ function Portrait() {
             src={portrait}
             alt="Line drawing of Mardino Santosa"
             width="768"
-            height="1365"
+            height="682"
             className="block h-auto w-full dark:invert"
           />
         ) : (
           <Misregister
             src={portrait}
             alt="Line drawing of Mardino Santosa, printed in three slightly misaligned inks"
-            ratio="768 / 1365"
+            ratio="768 / 682"
           />
         )}
         <figcaption className="label flex items-center justify-between gap-4 border-t-2 border-ink px-4 py-3">
