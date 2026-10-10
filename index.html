@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mardino Santosa</title>
+    <meta
+      name="description"
+      content="Mardino Santosa (zdienos) adalah seorang system administrator, network engineer, full stack developer, electronic enthusiast, maunya sih dibilang begitu."
+    />
+    <script>
+      (function () {
+        var t = null;
+        try { t = localStorage.getItem("theme"); } catch (e) {}
+        if (t !== "dark" && t !== "light") {
+          t = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        }
+        document.documentElement.setAttribute("data-theme", t);
+      })();
+    </script>
+
+    <link rel="icon" href="/images/icon/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/icon/favicon-32x32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/icon/apple-icon-180x180.png" />
+    <meta name="theme-color" content="#1d3bff" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@200..700&family=Geist+Mono:wght@400..600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Open Graph -->
+    <meta property="og:url" content="https://zdienos.com/" />
+    <meta property="og:title" content="Mardino Santosa" />
+    <meta
+      property="og:description"
+      content="Mardino Santosa (zdienos) adalah seorang system administrator, network engineer, full stack developer, electronic enthusiast, maunya sih dibilang begitu."
+    />
+    <meta
+      property="og:image"
+      content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiJROCM59VDr54ibY4a9uuZ2R0Xi2OVQco2OIOqEeDIilsxN_FxB8pwFFdsC3jcFUc-eLIfiy9VoK3zwFRIMryRbtSBeKbiakMnCaGKcXTcGYfIPm7pguRzeXRNdwUsJx0n4DBURxJa3IxXaqK_DSle4K6huXAP__7FeoJrmNzKfqCDIFLujyU/s16000/og-media.jpg"
+    />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="twitter:domain" content="zdienos.com" />
+    <meta property="twitter:url" content="https://zdienos.com/" />
+    <meta name="twitter:title" content="Mardino Santosa" />
+    <meta
+      name="twitter:description"
+      content="Mardino Santosa (zdienos) adalah seorang system administrator, network engineer, full stack developer, electronic enthusiast, maunya sih dibilang begitu."
+    />
+    <meta
+      name="twitter:image"
+      content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiJROCM59VDr54ibY4a9uuZ2R0Xi2OVQco2OIOqEeDIilsxN_FxB8pwFFdsC3jcFUc-eLIfiy9VoK3zwFRIMryRbtSBeKbiakMnCaGKcXTcGYfIPm7pguRzeXRNdwUsJx0n4DBURxJa3IxXaqK_DSle4K6huXAP__7FeoJrmNzKfqCDIFLujyU/s16000/og-media.jpg"
+    />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "mainEntityOfPage": { "@type": "WebPage", "@id": "https://zdienos.com" },
+        "headline": "Personal Website Mardino Santosa",
+        "description": "Selamat Datang di Personal Website Mardino Santosa",
+        "image": "https://zdienos.com/images/fotoME.jpeg",
+        "author": {
+          "@type": "Person",
+          "name": "Mardino Santosa",
+          "url": "https://www.linkedin.com/in/zdienos"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "zdienos",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://ecs7-p.tokopedia.net/img/cache/215-square/shops-1/2018/9/15/98472/98472_c0f9e91c-5d26-46a2-a20f-139145df8494.jpg"
+          }
+        },
+        "datePublished": "2019-11-11",
+        "dateModified": "2022-08-07"
+      }
+    </script>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
