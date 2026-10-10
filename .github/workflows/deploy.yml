@@ -55,9 +55,10 @@ jobs:
             echo "::error::Missing deploy settings:$missing (see README, Deploy)"
             exit 1
           fi
+          # Guard against uploading next to public_html instead of into it
           case "$FTP_SERVER_DIR" in
-            */) ;;
-            *) echo "::error::FTP_SERVER_DIR must end with a slash"; exit 1 ;;
+            / | */public_html/ | public_html/) echo "Target folder: $FTP_SERVER_DIR" ;;
+            *) echo "::error::FTP_SERVER_DIR should be the public_html folder ending in a slash, e.g. domains/zdienos.com/public_html/ (or / for an FTP account limited to it)"; exit 1 ;;
           esac
 
       # Until the FTP_DEPLOY_LIVE variable is "true", every run is a dry run:
