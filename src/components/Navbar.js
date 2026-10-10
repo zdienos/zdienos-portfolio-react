@@ -1,108 +1,63 @@
-import React, { useState } from "react";
-import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
-import Container from "react-bootstrap/Container";
-import { Link } from "react-router-dom";
-import { ImBlogger } from "react-icons/im";
-import {
-  AiOutlineHome,
-  AiOutlineUser,
-  AiOutlineAppstore,
-} from "react-icons/ai";
+import React from "react";
+import { Link, NavLink } from "react-router-dom";
+import DarkModeToggle from "./DarkModeToggle";
 
-import { CgFileDocument } from "react-icons/cg";
+const links = [
+  { to: "/", label: "Index", end: true },
+  { to: "/about", label: "About" },
+  { to: "/project", label: "Works" },
+  { to: "/resume", label: "CV" },
+];
+
+const cell =
+  "flex h-14 flex-col justify-between bg-paper px-3 py-2 text-sm font-bold uppercase leading-none tracking-wide transition-colors";
 
 function NavBar() {
-  const [expand, updateExpanded] = useState(false);
-  const [navColour, updateNavbar] = useState(false);
-  const [active, setActive] = useState('');
-
-  function scrollHandler() {
-    if (window.scrollY >= 20) {
-      updateNavbar(true);
-    } else {
-      updateNavbar(false);
-    }
-  }  
-
-  window.addEventListener("scroll", scrollHandler);
-
   return (
-    <Navbar
-      expanded={expand}
-      fixed="top"
-      
-      className={navColour ? "sticky" : "navbar"}
-    >
-      <Container>            
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="ml-auto" defaultActiveKey="#home">
-            <Nav.Item>
-              <Nav.Link as={Link} to="/" onClick={() => {
-                updateExpanded(false);
-                setActive("/");
-                }}
-                className={`${active === "/" && 'm-active'}`}
-                >
-                  
-                <AiOutlineHome style={{ marginBottom: "2px" }} /> Home
-              </Nav.Link>
-            </Nav.Item>
+    <header className="sticky top-0 z-50 border-b-2 border-ink">
+      <nav
+        aria-label="Primary"
+        className="grid grid-cols-3 gap-[2px] bg-ink md:grid-cols-[1.6fr_repeat(5,minmax(0,1fr))_auto]"
+      >
+        <Link
+          to="/"
+          className="col-span-3 flex h-14 items-center gap-3 bg-paper px-4 text-2xl font-black uppercase tracking-tight font-condensed md:col-span-1"
+        >
+          <span className="h-5 w-5 rounded-full bg-signal" aria-hidden="true" />
+          Mardino Santosa
+        </Link>
 
-            <Nav.Item>
-              <Nav.Link
-                as={Link}
-                to="/about"
-                onClick={() => {
-                  updateExpanded(false);
-                  setActive("/about");
-                }}
-                className={` ${active === "/about" && 'm-active'}`}
-              >
-                <AiOutlineUser style={{ marginBottom: "2px" }} /> About
-              </Nav.Link>
-            </Nav.Item>
+        {links.map(({ to, label, end }, i) => (
+          <NavLink
+            key={to}
+            to={to}
+            end={end}
+            className={({ isActive }) =>
+              `${cell} ${
+                isActive
+                  ? "!bg-signal text-black"
+                  : "hover:bg-ink hover:text-paper"
+              }`
+            }
+          >
+            <span className="text-[10px] font-semibold">0{i + 1}</span>
+            <span>{label}</span>
+          </NavLink>
+        ))}
 
-            <Nav.Item>
-              <Nav.Link
-                as={Link}
-                to="/project"
-                onClick={() => {
-                  updateExpanded(false);
-                  setActive("/project");
-                }}
-                className={`${active === "/project" && 'm-active'}`}
-              >
-                <AiOutlineAppstore style={{ marginBottom: "2px" }} /> Portfolio
-              </Nav.Link>
-            </Nav.Item>
+        <a
+          href="https://blog.zdienos.com/"
+          target="_blank"
+          rel="noreferrer"
+          className={`${cell} hover:bg-ink hover:text-paper`}
+        >
+          <span className="text-[10px] font-semibold">05</span>
+          <span>Blog ↗</span>
+        </a>
 
-            <Nav.Item>
-              <Nav.Link
-                as={Link}
-                to="/resume"
-                onClick={() => {
-                  updateExpanded(false);
-                  setActive("/resume");
-                }}
-                className={`${active === "/resume" && 'm-active'}`}
-              >
-                <CgFileDocument style={{ marginBottom: "2px" }} /> Resume
-              </Nav.Link>
-            </Nav.Item>
-
-            <Nav.Item>
-              <Nav.Link
-                href="https://blog.zdienos.com/"
-                target="_blank"                
-              >
-                <ImBlogger style={{ marginBottom: "2px" }} /> Blogs
-              </Nav.Link>
-            </Nav.Item>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+        <DarkModeToggle className="h-14" />
+      </nav>
+    </header>
   );
 }
 

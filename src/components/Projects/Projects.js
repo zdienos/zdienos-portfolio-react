@@ -1,79 +1,93 @@
-import React, { useState } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Tab from "react-bootstrap/Tab";
-import Tabs from "react-bootstrap/Tabs";
 import ProjectCard from "./ProjectCards";
-// import Preloader from "../Pre";
+import { PageHead } from "../Heads";
 
 const npointURL = "https://api.npoint.io/b5c3511ff95746384e06";
 
 function Projects() {
   const [projects, setData] = useState([]);
   const [isLoading, setLoading] = useState(true);
-  const headers = {
-    'Access-Control-Allow-Origin': '*'    
-  }
+  const [activeKey, setActiveKey] = useState("webapp");
 
-  const getData = async () => {
-    const result = await axios(npointURL, {
-      headers: headers
-    });
-    setData(result.data);
-    setLoading(false);
-  };
+  useEffect(() => {
+    let active = true;
+    axios(npointURL)
+      .then((result) => {
+        if (active) setData(result.data.projects || []);
+      })
+      .catch((ex) => console.log("fetch projects failed", ex))
+      .finally(() => active && setLoading(false));
+    return () => {
+      active = false;
+    };
+  }, []);
 
-  // useEffect(() => {
-    getData();
-  // }, [])
-
+  const current = projects.find(({ key }) => key === activeKey) || projects[0];
 
   return (
-    <Container fluid className="project-section">
-      <Container>
-        <h2 className="project-heading">
-          My Recent <strong>Works </strong>
-        </h2>
-        <p>Here are a few projects I've been worked on.</p>
-        {isLoading && <div id={"spin-loader"} />}
-        <Tabs
-          defaultActiveKey="webapp"
-          id="uncontrolled-tab-example"
-          style={{ justifyContent: "center", paddingTop: "20px" }}
-          variant="pills"
-        >
-          {projects.projects &&
-            projects.projects.map(({ key, title, data }) => (
-              <Tab key={key} eventKey={key} title={title}>
-                <Row
-                  style={{ justifyContent: "center", paddingBottom: "10px" }}
-                >
-                  {data &&
-                    data.map(
-                      ({ id, imgpath, isblog, title, description, link }) => (
-                        <Col
-                          xs={12}
-                          md={6}
-                          lg={4}
-                          className="project-card"
-                          key={id}
-                        >
-                          <ProjectCard
-                            imgPath={imgpath}
-                            isBlog={isblog}
-                            title={title}
-                            description={description}
-                            link={link}
-                          />
-                        </Col>
-                      )
-                    )}
-                </Row>
-              </Tab>
-            ))}
-        </Tabs>
-      </Container>
-    </Container>
+    <>
+      <PageHead kicker="My recent works" title="Works">
+        <p className="text-lg font-semibold">
+          Here are a few projects I've worked on.
+        </p>
+      </PageHead>
+
+      <div
+        role="tablist"
+        aria-label="Project categories"
+        className="grid grid-cols-2 gap-[2px] border-b-2 border-ink bg-ink"
+      >
+        {projects.map(({ key, title, data }) => {
+          const selected = current && current.key === key;
+          return (
+            <button
+              key={key}
+              type="button"
+              role="tab"
+              aria-selected={selected}
+              onClick={() => setActiveKey(key)}
+              className={`flex items-start justify-between px-4 py-4 text-left text-4xl font-black uppercase leading-none font-condensed transition-colors md:text-7xl ${
+                selected
+                  ? "bg-signal text-black"
+                  : "bg-paper hover:bg-ink hover:text-paper"
+              }`}
+            >
+              {title}
+              <span className="font-sans text-xs font-bold">
+                {String(data ? data.length : 0).padStart(2, "0")}
+              </span>
+            </button>
+          );
+        })}
+      </div>
+
+      {isLoading && (
+        <p className="border-b-2 border-ink px-4 py-10 text-xs font-bold uppercase tracking-widest">
+          Loading projects…
+        </p>
+      )}
+
+      {current && current.data && (
+        <ol role="tabpanel">
+          {current.data.map(
+            ({ id, imgpath, isblog, title, description, link }, i) => (
+              <li key={id}>
+                <ProjectCard
+                  index={i + 1}
+                  flip={i % 2 === 1}
+                  imgPath={imgpath}
+                  isBlog={isblog}
+                  title={title}
+                  description={description}
+                  link={link}
+                />
+              </li>
+            )
+          )}
+        </ol>
+      )}
+    </>
   );
 }
 

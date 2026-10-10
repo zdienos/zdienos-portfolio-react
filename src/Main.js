@@ -1,62 +1,32 @@
-import React, { useState, useEffect, lazy, Suspense } from "react";
+import React, { lazy, Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Preloader from "../src/components/Pre";
+import Preloader from "./components/Pre";
 
-import "./main.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import DarkModeToggle from "./components/DarkModeToggle";
-// import { BsFillMoonFill, BsFillSunFill } from "react-icons/bs";
+const Navbar = lazy(() => import("./components/Navbar"));
+const Home = lazy(() => import("./components/Home/Home"));
+const About = lazy(() => import("./components/About/About"));
+const Projects = lazy(() => import("./components/Projects/Projects"));
+const Footer = lazy(() => import("./components/Footer"));
+const Resume = lazy(() => import("./components/Resume/Resume"));
+const ScrollToTop = lazy(() => import("./components/ScrollToTop"));
 
-
-
-//import Navbar from "./components/Navbar";
-const Navbar  = lazy(() => import("./components/Navbar"));
-// import Home from "./components/Home/Home";
-const Home  = lazy(() => import("./components/Home/Home"));
-// import About from "./components/About/About";
-const About  = lazy(() => import("./components/About/About"));
-// import Projects from "./components/Projects/Projects";
-const Projects  = lazy(() => import("./components/Projects/Projects"));
-// import Footer from "./components/Footer";
-const Footer  = lazy(() => import("./components/Footer"));
-// import Resume from "./components/Resume/Resume";
-const Resume  = lazy(() => import("./components/Resume/Resume"));
-// import ScrollToTop from "./components/ScrollToTop";
-const ScrollToTop  = lazy(() => import("./components/ScrollToTop"));
-
-
-
-function Main() {  
-  const [load, upadateLoad] = useState(true);  
-  
-  
-  useEffect(() => {    
-    const timer = setTimeout(() => {
-      upadateLoad(false);
-    }, 1200);
-    
-    return () => clearTimeout(timer);
-  }, []);
-
+function Main() {
   return (
-    <Router>      
-      {/* <Preloader load={load} /> */}
-      <div className="App" id={load ? "no-scroll" : "scroll"}> 
-                      
-      <DarkModeToggle/>
-
-      <Suspense fallback={<Preloader />}> <Navbar /> </Suspense>
-      <Suspense fallback={<Preloader />}>   <ScrollToTop /> </Suspense>
-      <Suspense fallback={<Preloader />}>  
-        <Routes>
-          <Route path="/" exact element={<Home />} /> 
-          <Route path="/project" element={<Projects />} /> 
-          <Route path="/about" element={<About/>} /> 
-          <Route path="/resume" element={<Resume/>} /> 
-        </Routes>
+    <Router>
+      <div id="top" className="min-h-screen">
+        <Suspense fallback={<Preloader />}>
+          <Navbar />
+          <ScrollToTop />
+          <main>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/project" element={<Projects />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/resume" element={<Resume />} />
+            </Routes>
+          </main>
+          <Footer />
         </Suspense>
-        <Suspense fallback={<Preloader />}> <Footer /> </Suspense>
-                      
       </div>
     </Router>
   );

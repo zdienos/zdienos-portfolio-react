@@ -1,54 +1,29 @@
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
 import Github from "./Github";
 import Techstack from "./Techstack";
 import Aboutcard from "./AboutCard";
-import laptopImg from "../../Assets/about.png";
 import Toolstack from "./Toolstack";
 import Wakatime from "./Wakatime";
+import { PageHead, SectionHead } from "../Heads";
 
 function About() {
   return (
-    <Container fluid className="about-section">      
-      <Container>
-        <Row style={{ justifyContent: "center", padding: "10px" }}>
-          <Col
-            md={7}
-            style={{
-              justifyContent: "center",
-              paddingTop: "30px",
-              paddingBottom: "50px",
-            }}
-          >
-            <h1 style={{ fontSize: "2.1em", paddingBottom: "20px" }}>
-               Who <strong className="purple"> am I?</strong>
-            </h1>
-            <Aboutcard />
-          </Col>
-          <Col
-            md={5}
-            style={{ paddingTop: "120px", paddingBottom: "20px" }}
-            className="about-img"
-          >
-            <img src={laptopImg} alt="about" className="img-fluid" />
-          </Col>
-        </Row>
-        <h2 className="project-heading">
-          Stacks <strong className="purple"> I Know</strong>
-        </h2>
+    <>
+      <PageHead kicker="About — Who am I?" title="About" />
 
-        <Techstack />
+      <Aboutcard />
 
-        <h1 className="project-heading">
-          Tools <strong className="purple">I Use</strong>
-        </h1>
-        <Toolstack />
+      <SectionHead num="02" label="Stacks I know" title="Stack" />
+      <Techstack />
 
-        <Github />
+      <SectionHead num="03" label="Tools I use" title="Tools" />
+      <Toolstack />
 
-        <Wakatime />
-      </Container>
-    </Container>
+      <Github />
+
+      <SectionHead num="05" label="Languages I use" title="Languages" />
+      <Wakatime />
+    </>
   );
 }
 
