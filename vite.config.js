@@ -56,6 +56,8 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ["**/*.{js,mjs,css,html,png,jpg,jpeg,svg,woff2}"],
+        // Kill-switch for the old CRA worker; never part of the new app shell
+        globIgnores: ["service-worker.js"],
       },
     }),
   ],

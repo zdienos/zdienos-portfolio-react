@@ -1,0 +1,75 @@
+name: Deploy to zdienos.com
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Only list what would change on the server"
+        type: boolean
+        default: false
+
+# Never run two uploads at the same time
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build
+        run: npm run build
+
+      - name: Check deploy settings
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_SERVER_DIR: ${{ vars.FTP_SERVER_DIR }}
+        run: |
+          missing=""
+          for name in FTP_SERVER FTP_USERNAME FTP_PASSWORD FTP_SERVER_DIR; do
+            [ -n "${!name}" ] || missing="$missing $name"
+          done
+          if [ -n "$missing" ]; then
+            echo "::error::Missing deploy settings:$missing (see README, Deploy)"
+            exit 1
+          fi
+          case "$FTP_SERVER_DIR" in
+            */) ;;
+            *) echo "::error::FTP_SERVER_DIR must end with a slash"; exit 1 ;;
+          esac
+
+      # Until the FTP_DEPLOY_LIVE variable is "true", every run is a dry run:
+      # the log shows what would be uploaded, and the server is left alone.
+      - name: Upload over FTPS
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          port: 21
+          local-dir: ./dist/
+          server-dir: ${{ vars.FTP_SERVER_DIR }}
+          dry-run: ${{ vars.FTP_DEPLOY_LIVE != 'true' || inputs.dry_run == true }}
+          log-level: standard

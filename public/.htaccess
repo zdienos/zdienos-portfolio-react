@@ -1,0 +1,27 @@
+# zdienos.com — single-page app served by Apache/LiteSpeed (DirectAdmin)
+# Deployed from the repo; edit public/.htaccess there, not on the server.
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Always use HTTPS
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # Real files and folders are served as they are
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # Everything else is a client-side route (/about, /project, /resume, …)
+  RewriteRule ^ index.html [L]
+</IfModule>
+
+<IfModule mod_headers.c>
+  # Entry points must be revalidated so a new deploy shows up immediately.
+  # Hashed files in /assets get their own long cache rule (assets/.htaccess).
+  <FilesMatch "^(index\.html|sw\.js|registerSW\.js|service-worker\.js|manifest\.webmanifest)$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+</IfModule>
