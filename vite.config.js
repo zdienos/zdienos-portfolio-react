@@ -58,6 +58,9 @@ export default defineConfig({
         globPatterns: ["**/*.{js,mjs,css,html,png,jpg,jpeg,svg,woff2}"],
         // Kill-switch for the old CRA worker; never part of the new app shell
         globIgnores: ["service-worker.js", "serviceWorker.js", "og-image.png"],
+        // Only the app's own routes get the offline index.html. Everything else
+        // (sitemap.xml, cv-en.pdf, /whatsapp-link-generator/, …) goes to the server.
+        navigateFallbackAllowlist: [/^\/(?:about|project|resume)?\/?$/],
       },
     }),
   ],
