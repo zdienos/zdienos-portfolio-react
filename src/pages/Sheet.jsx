@@ -56,22 +56,25 @@ function Portrait() {
   const [plain, setPlain] = useState(false);
   return (
     <section className="grid border-b-2 border-ink md:grid-cols-12">
-      <figure className="relative border-b-2 border-ink md:col-span-5 md:border-b-0 md:border-r-2">
-        {plain ? (
-          <img
-            src={portrait}
-            alt="Line drawing of Mardino Santosa"
-            width="768"
-            height="682"
-            className="block h-auto w-full dark:invert"
-          />
-        ) : (
-          <Misregister
-            src={portrait}
-            alt="Line drawing of Mardino Santosa, printed in three slightly misaligned inks"
-            ratio="768 / 682"
-          />
-        )}
+      <figure className="relative flex flex-col border-b-2 border-ink md:col-span-5 md:border-b-0 md:border-r-2">
+        {/* The drawing sits on the caption rule; spare height becomes paper above it */}
+        <div className="flex flex-1 items-end">
+          {plain ? (
+            <img
+              src={portrait}
+              alt="Line drawing of Mardino Santosa"
+              width="768"
+              height="682"
+              className="block h-auto w-full mix-blend-multiply dark:invert dark:mix-blend-lighten"
+            />
+          ) : (
+            <Misregister
+              src={portrait}
+              alt="Line drawing of Mardino Santosa, printed in three slightly misaligned inks"
+              ratio="768 / 682"
+            />
+          )}
+        </div>
         <figcaption className="label flex items-center justify-between gap-4 border-t-2 border-ink px-4 py-3">
           <span>Fig. 1 — The author, {plain ? "as drawn" : "off register"}</span>
           <button
