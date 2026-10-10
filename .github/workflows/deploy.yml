@@ -78,9 +78,16 @@ jobs:
           case "$DIR" in /*) path="%2F${DIR#/}" ;; *) path="$DIR" ;; esac
           # --insecure matches the upload step's default (shared hosts often serve a
           # certificate for the server name, not the domain); traffic is still TLS
-          if ! listing=$(curl -sS --ssl-reqd --insecure --connect-timeout 30 --list-only \
-              --netrc-file "$RUNNER_TEMP/netrc" "ftp://$FTP_SERVER/$path"); then
-            echo "::error::Could not log in or open $DIR over FTPS"
+          list() {
+            curl -sS --ssl-reqd --insecure --connect-timeout 30 --list-only \
+              --netrc-file "$RUNNER_TEMP/netrc" "ftp://$FTP_SERVER/$1"
+          }
+          if ! listing=$(list "$path"); then
+            # Show where this FTP account lands after login, to find the right path
+            echo "Folder this FTP account sees right after login:"
+            list "" | sort | head -50 || true
+            rm -f "$RUNNER_TEMP/netrc"
+            echo "::error::Could not open $DIR over FTPS. Set FTP_SERVER_DIR relative to the folder listed above."
             exit 1
           fi
           rm -f "$RUNNER_TEMP/netrc"
