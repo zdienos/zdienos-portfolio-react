@@ -25,6 +25,11 @@ Options -MultiViews
   RewriteRule ^ index.html [QSA,L]
 </IfModule>
 
+<IfModule mod_mime.c>
+  # The PWA manifest; without this Apache sends application/octet-stream
+  AddType application/manifest+json .webmanifest
+</IfModule>
+
 <IfModule mod_headers.c>
   # Entry points must be revalidated so a new deploy shows up immediately.
   # Hashed files in /assets get their own long cache rule (assets/.htaccess).
