@@ -136,4 +136,9 @@ jobs:
             echo "Cloudflare cache purged"
           else
             echo "::warning::Cloudflare purge failed: $response"
+            # Tell a bad token apart from a token that lacks access to this zone
+            verify=$(curl -sS "https://api.cloudflare.com/client/v4/user/tokens/verify" \
+              -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN")
+            echo "Token check: $(echo "$verify" | jq -c '{success, status: .result.status, errors}')"
+            echo "Zone ID length: ${#ZONE_ID} (a zone ID is 32 hex characters)"
           fi
